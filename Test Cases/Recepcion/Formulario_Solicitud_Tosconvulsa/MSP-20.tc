@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-20</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>eb6b8118-d1db-4422-9ec2-bc8335eed6e6</testCaseGuid>
+   <variable>
+      <defaultValue>'2015'</defaultValue>
+      <description></description>
+      <id>1a0db817-b494-4ccd-ac21-85ec4f6ebdbc</id>
+      <masked>false</masked>
+      <name>codigo28</name>
+   </variable>
+</TestCaseEntity>

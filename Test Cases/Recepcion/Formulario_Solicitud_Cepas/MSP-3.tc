@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-3</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>556d63f5-f2bc-4781-bfd4-dd0060823011</testCaseGuid>
+   <variable>
+      <defaultValue>'3200'</defaultValue>
+      <description></description>
+      <id>9954dfaa-56c1-4947-9a95-93998ccdf08d</id>
+      <masked>false</masked>
+      <name>codigo1</name>
+   </variable>
+   <variable>
+      <defaultValue>'2330'</defaultValue>
+      <description></description>
+      <id>bd493282-f0b3-482f-aab7-9db2f68809a4</id>
+      <masked>false</masked>
+      <name>codigo2</name>
+   </variable>
+</TestCaseEntity>

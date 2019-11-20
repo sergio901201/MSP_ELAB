@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-27</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>0590b3c0-dae5-45a5-ae24-75331dda9860</testCaseGuid>
+   <variable>
+      <defaultValue>'3100'</defaultValue>
+      <description></description>
+      <id>74b9d3c4-43b5-46fc-8880-e13c85b27127</id>
+      <masked>false</masked>
+      <name>codigo20</name>
+   </variable>
+   <variable>
+      <defaultValue>'2026'</defaultValue>
+      <description></description>
+      <id>3d0d3dbd-83cf-49ee-8cf3-40cc3f7249f4</id>
+      <masked>false</masked>
+      <name>codigo21</name>
+   </variable>
+</TestCaseEntity>

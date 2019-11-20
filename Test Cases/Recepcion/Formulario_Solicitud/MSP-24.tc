@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-24</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>d6fd2398-d9ec-4b4f-a393-3e36943d39e8</testCaseGuid>
+   <variable>
+      <defaultValue>'2005'</defaultValue>
+      <description></description>
+      <id>6cc02b20-3850-49dd-8ac6-30efbca5c0aa</id>
+      <masked>false</masked>
+      <name>codigo29</name>
+   </variable>
+</TestCaseEntity>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-6</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>927f3471-b714-4b51-99a9-729d21cde9e1</testCaseGuid>
+   <variable>
+      <defaultValue>'401'</defaultValue>
+      <description></description>
+      <id>07d5b312-1b5a-46e9-9918-541bbf991184</id>
+      <masked>false</masked>
+      <name>codigo3</name>
+   </variable>
+</TestCaseEntity>
