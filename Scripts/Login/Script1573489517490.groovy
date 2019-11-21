@@ -26,13 +26,13 @@ WebUI.setEncryptedText(findTestObject('Login/Page_login/input_Contrasea_vPASSWOR
 
 WebUI.click(findTestObject('Login/Page_login/input_Men_BTNLOGIN'))
 
-not_run: boolean login = WebUI.verifyElementPresent(findTestObject('Login/Page_login/select_vMENU'), 0)
 
-not_run: if (!(login)) {
-    login = false
-} else {
+boolean login = WebUI.verifyElementPresent(findTestObject('Object Repository/Login/Page_login/input_Men_BTNCONFIRMAR'), 30)
+
+if (login) {
     WebUI.comment('Then he should be able to login successfully')
+} else {
+    WebUI.comment('Then you should NOT be able to log in correctly')
 }
 
-not_run: return login
-
+return login
