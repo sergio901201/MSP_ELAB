@@ -103,7 +103,7 @@ String result = f.FechaActual()
 WebUI.executeJavaScript('$("#SOL_FECHAEXTRACCION").val("'+result+'");', null)
 
 //Select option Reactivo in Tamizaje por prueba rápida
-WebUI.selectOptionByValue(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/Page_Solicitud VIH Mayores/Page_Solicitud VIH Mayores/select_TAMIZAJEPRUEBARAPIDA'), "R", true)
+WebUI.selectOptionByValue(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/Page_Solicitud VIH Mayores/Page_Solicitud VIH Mayores/select_TAMIZAJEPRUEBARAPIDA'), "N", true)
 
 //Write Marca Comercial
 WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/Page_Solicitud VIH Mayores/input_Marca Comercial_SOL_TAMPRUEBARAPIDAMARCA'), "Marca Comercial de Prueba")
@@ -111,26 +111,56 @@ WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/P
 //Select Práctica Sexual Hombre SI
 WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_Si_SOL_PRACTICASEXUALHOMBRE'))
 
-//Select Extranjero SI
-WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_Si_SOL_EXTRANJERO'))
+//Select Extranjero NO
+WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_No_SOL_EXTRANJERO'))
 
-//Verify Element Present Extranjero SI + País
-boolean extranjero = WebUI.verifyElementPresent(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/select_PAIS'), 30)
+//Select Vía Sexual SI
+WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_Si_SOL_VIAADQUISEXUAL'))
 
-if(extranjero){
-	WebUI.selectOptionByValue(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/select_PAIS'), "0", true)
+//Select Vía Sanguínea NO
+WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_No_SOL_VIAADQUISANGRE'))
+
+//Select Vía Vertical SI
+WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_Si_SOL_VIAADQUIVERTICAL'))
+
+//Select Presencia Enfermedades Oportunistas
+WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_Si_SOL_ENFOPORTUNISTAS'))
+
+//Verify Ckeckpoint true in Presencia de Enfermedades Oportunistas
+boolean PEO = WebUI.verifyElementChecked(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_Si_SOL_ENFOPORTUNISTAS'), 10)
+
+if(PEO){
+	//Select Tuberculosis Pulmonar NO
+	WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_No_SOL_ENFOPTUBERCPULMONAR'))
+	
+	//Select Tuberculosis Extra Pulmonar NO
+	WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_No_SOL_ENFOPTUBERCEXTRAPULMONAR'))
+	
+	//Select Tuberculosis Recurrente SI
+	WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_Si_SOL_ENFOPTUBERCRECURRENTE'))
+	
+	//Select Pneumocystis jiroveci SI
+	WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_Si_SOL_ENFOPPNEUMOJIROVECI'))
+	
+	//Select Neumonía recurrente NO
+	WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_No_SOL_ENFOPNEUMONIARECURRENTE'))
+	
+	// Select Criptococosis SI
+	WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/ENFERMEDADES OPORTUNISTAS/Page_Solicitud VIH Mayores/input_Si_SOL_ENFOPCRIPTOCOCOSIS'))
 }
 
+//clic BTN Confirmar
 WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/input_Para generar un nuevo prrafo en los campos de texto usar CtrlEnter_BTN_ENTER'))
 
 WebUI.delay(1)
 
 boolean alert = WebUI.verifyAlertPresent(5, FailureHandling.CONTINUE_ON_FAILURE)
 
-if (alert) {
-    println('Debe especificar el País del Extranjero, Prueba Correcta')
+if (alert && PEO) {
+    println('Debe especificar una Histoplasmosis, Prueba Correcta')
 } else {
 	println ('Nota aclaratoria: Verificar que el campo sea obligatorio')
+	println ('Nota aclaratoria: Verificar que el campo Presencia de Enfermedades Oportunistas haya sido seleccionado (SI)')
     println('Prueba incorrecta')
 }
 

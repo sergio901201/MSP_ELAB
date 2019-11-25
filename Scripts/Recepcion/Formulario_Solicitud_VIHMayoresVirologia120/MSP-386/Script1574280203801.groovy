@@ -38,7 +38,7 @@ WebUI.delay(1)
 
 WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Bienvenida/Page_Bienvenida/td_Bandeja Recepcin'))
 
-WebUI.delay(1)
+WebUI.delay(2)
 
 WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Bandeja Mesa de Entrada/img_Ingrese Nro de Solicitud_INSERT'))
 

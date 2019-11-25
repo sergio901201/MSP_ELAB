@@ -20,6 +20,8 @@ WebUI.openBrowser('')
 
 WebUI.navigateToUrl(GlobalVariable.url)
 
+WebUI.maximizeWindow()
+
 WebUI.setText(findTestObject('Login/Page_login/input_Usuario_vUSUARIOID'), User)
 
 WebUI.setEncryptedText(findTestObject('Login/Page_login/input_Contrasea_vPASSWORD'), Password)

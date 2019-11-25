@@ -14,13 +14,11 @@ import com.kms.katalon.core.testdata.InternalData as InternalData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.webui.keyword.internal.WebUIAbstractKeyword as WebUIAbstractKeyword
+import com.kms.katalon.core.webui.keyword.internal.WebUIAbstractKeyword
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import net.sf.cglib.core.ClassesKey.Key as Key
-import java.util.Date as Date
-import com.database.FechaHoy
 
 InternalData ID = findTestData('Data Files/Internal Data Login')
 
@@ -46,7 +44,7 @@ WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Bandeja Mesa de Ent
 WebUI.delay(1)
 
 //Select Code Study
-WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Ingreso Solicitud/input_Cdigo_vPEST_ID'), '120')
+WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Ingreso Solicitud/input_Cdigo_vPEST_ID'), '121')
 
 WebUI.delay(1)
 
@@ -74,8 +72,8 @@ WebUI.sendKeys(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/
 WebUI.delay(1)
 
 //Select Type Document
-WebUI.selectOptionByValue(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/select_TIPO_DOCUMENTO'), '1', 
-    true)
+WebUI.selectOptionByValue(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/select_TIPO_DOCUMENTO'), '201',
+	true)
 
 WebUI.delay(1)
 
@@ -85,56 +83,20 @@ WebUI.sendKeys(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/
 WebUI.delay(1)
 
 //Document Number
-WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/input_-_vSOL_PACIENTENRODOCUMENTO'), '62843840')
+WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/input_-_vSOL_PACIENTENRODOCUMENTO'), '')
 
 WebUI.delay(1)
-
-//Insert Centro Asistencial de Procedencia
-WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/Page_Solicitud VIH Mayores/input_Centro asistencial de procedencia_SOL_CENTROASISPROC'), 
-    'Centro asistencial de Procedencia de Prueba')
-
-WebUI.delay(1)
-
-//Obtener Fecha de Hoy
-FechaHoy f = new FechaHoy()
-String result = f.FechaActual()
-
-//Insert Fecha de Recolección de la Muestra
-WebUI.executeJavaScript('$("#SOL_FECHAEXTRACCION").val("'+result+'");', null)
-
-//Select option Reactivo in Tamizaje por prueba rápida
-WebUI.selectOptionByValue(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/Page_Solicitud VIH Mayores/Page_Solicitud VIH Mayores/select_TAMIZAJEPRUEBARAPIDA'), "R", true)
-
-//Write Marca Comercial
-WebUI.setText(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/Page_Solicitud VIH Mayores/input_Marca Comercial_SOL_TAMPRUEBARAPIDAMARCA'), "Marca Comercial de Prueba")
-
-//Select Práctica Sexual Hombre SI
-WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_Si_SOL_PRACTICASEXUALHOMBRE'))
-
-//Select Extranjero SI
-WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/input_Si_SOL_EXTRANJERO'))
-
-//Verify Element Present Extranjero SI + País
-boolean extranjero = WebUI.verifyElementPresent(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/select_PAIS'), 30)
-
-if(extranjero){
-	WebUI.selectOptionByValue(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/INFECCION POR VIH-1/Page_Solicitud VIH Mayores/select_PAIS'), "0", true)
-}
 
 WebUI.click(findTestObject('Object Repository/RECEPCION/Page_Solicitud Cepas/input_Para generar un nuevo prrafo en los campos de texto usar CtrlEnter_BTN_ENTER'))
-
-WebUI.delay(1)
 
 boolean alert = WebUI.verifyAlertPresent(5, FailureHandling.CONTINUE_ON_FAILURE)
 
 if (alert) {
-    println('Debe especificar el País del Extranjero, Prueba Correcta')
+	println('Debe especificar un Pasaporte, Prueba Correcta')
 } else {
-	println ('Nota aclaratoria: Verificar que el campo sea obligatorio')
-    println('Prueba incorrecta')
+	println('Prueba incorrecta')
 }
 
 WebUI.delay(1)
 
 WebUI.closeBrowser()
-
