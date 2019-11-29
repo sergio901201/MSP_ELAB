@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-32</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>6edc72fb-e6b1-4d49-8a6f-f4ecf6c3b901</testCaseGuid>
+   <variable>
+      <defaultValue>'31/02/2019'</defaultValue>
+      <description></description>
+      <id>7bdba39e-7f01-4593-9282-40ac9466c3d4</id>
+      <masked>false</masked>
+      <name>fecha</name>
+   </variable>
+</TestCaseEntity>

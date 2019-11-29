@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-1</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b8b8add5-b126-4c27-9852-f20084230153</testCaseGuid>
+   <variable>
+      <defaultValue>'3200'</defaultValue>
+      <description></description>
+      <id>7b5dce36-7b50-41db-9c2c-aaeb64ed1729</id>
+      <masked>false</masked>
+      <name>codigo1</name>
+   </variable>
+   <variable>
+      <defaultValue>'2330'</defaultValue>
+      <description></description>
+      <id>eb5bc2c2-6e1e-43c1-a215-7d9835cf5060</id>
+      <masked>false</masked>
+      <name>codigo2</name>
+   </variable>
+   <variable>
+      <defaultValue>'43'</defaultValue>
+      <description></description>
+      <id>749f31dd-0da8-4d32-a91e-291f2c4af9a5</id>
+      <masked>false</masked>
+      <name>Pais</name>
+   </variable>
+   <variable>
+      <defaultValue>'19771915'</defaultValue>
+      <description></description>
+      <id>b020d383-e8ca-493b-a780-e0434f0b37bf</id>
+      <masked>false</masked>
+      <name>NoDoc</name>
+   </variable>
+</TestCaseEntity>

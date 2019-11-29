@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-184</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>dfc6a7b0-14b7-4b25-9f59-8739ec56c24d</testCaseGuid>
+   <variable>
+      <defaultValue>'25/09/19'</defaultValue>
+      <description></description>
+      <id>c39acbea-0e67-494f-bf23-4b471f114348</id>
+      <masked>false</masked>
+      <name>fecha</name>
+   </variable>
+   <variable>
+      <defaultValue>'ppdd'</defaultValue>
+      <description></description>
+      <id>e80b3f14-8523-4144-8ff5-747943e93c18</id>
+      <masked>false</masked>
+      <name>estudio</name>
+   </variable>
+   <variable>
+      <defaultValue>false</defaultValue>
+      <description></description>
+      <id>734dc798-6ca0-4c21-87b1-db5cb3a00d2f</id>
+      <masked>false</masked>
+      <name>tab</name>
+   </variable>
+</TestCaseEntity>

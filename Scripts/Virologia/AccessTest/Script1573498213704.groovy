@@ -12,16 +12,20 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testdata.InternalData as InternalData
+import com.kms.katalon.core.testobject.RequestObject as RequestObject
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.TestObjectProperty as TestObjectProperty
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+import com.database.ContarRowsTable as ContarRowsTable
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import com.database.CRUD
 
 InternalData ID = findTestData('Data Files/Internal Data Login')
 
-WebUI.callTestCase(findTestCase('Login'), [('User') : ID.getValue(1, 1), ('Password') : ID.getValue(
-            2, 1)], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Login'), [('User') : ID.getValue(1, 3), ('Password') : ID.getValue(2, 3)], FailureHandling.STOP_ON_FAILURE)
 
 not_run: WebUI.selectOptionByValue(findTestObject('Login/Page_login/select_vMENU'), ID.getValue(1, 13), true)
 
@@ -39,9 +43,27 @@ WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/td_Bande
 
 WebUI.delay(2)
 
-WebUI.click(findTestObject('Login/Page_Bienvenida/img_VIROLOGA_IMAGE2_MPAGE'))
+WebUI.executeJavaScript('$("#vFECHADESDE").val("25/09/19");', null)
 
-WebUI.delay(2)
+WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/img_Sector_IMAGE1'))
 
+WebUI.delay(5)
+
+//EJECUTE js
+not_run: int fecha = Integer.parseInt(WebUI.executeJavaScript('return $("#SolicitudesContainerTbl").length.toString();', 
+        null))
+ContarRowsTable c = new ContarRowsTable()
+int filas = c.contarrows()
+println("..... # de filas de la tabla es: $filas")
+
+//Consulta BD
+CRUD crud = new CRUD()
+ResultSet resultado = crud.FiltroFechaDesde()
+while(resultado.next()){
+	Object username = resultado.getObject("USUARIOID")
+	Object password = resultado.getObject(2)
+	println ("Nombre de Usuario:" + username)
+	println ("Contraseña:" + password)
+}
 WebUI.closeBrowser()
 

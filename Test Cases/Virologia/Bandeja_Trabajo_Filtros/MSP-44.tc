@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-44</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>911f466a-d3b7-462c-b711-fdc6098f4a02</testCaseGuid>
+   <variable>
+      <defaultValue>'abc'</defaultValue>
+      <description></description>
+      <id>e7c6033f-0189-4369-a762-6b086853436a</id>
+      <masked>false</masked>
+      <name>fecha</name>
+   </variable>
+</TestCaseEntity>

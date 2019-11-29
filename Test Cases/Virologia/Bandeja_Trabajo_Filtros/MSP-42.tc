@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-42</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e9227cdc-42ea-4434-a7bc-031b1750b662</testCaseGuid>
+   <variable>
+      <defaultValue>'25/09/19'</defaultValue>
+      <description></description>
+      <id>c40509c2-9f69-49aa-a93c-6f284a1d862e</id>
+      <masked>false</masked>
+      <name>fecha</name>
+   </variable>
+   <variable>
+      <defaultValue>'ppkk'</defaultValue>
+      <description></description>
+      <id>3ef63521-631c-446b-b262-291d21c03fc6</id>
+      <masked>false</masked>
+      <name>estudio</name>
+   </variable>
+   <variable>
+      <defaultValue>false</defaultValue>
+      <description></description>
+      <id>47188068-0bc8-4702-9ca5-2b2ecd067a7f</id>
+      <masked>false</masked>
+      <name>tab</name>
+   </variable>
+</TestCaseEntity>

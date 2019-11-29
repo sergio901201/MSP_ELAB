@@ -31,4 +31,15 @@ public class FechaHoy {
 		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
 		return formateador.format(ahora);
 	}
+
+	/*
+	 * Año corto
+	 */
+
+	@Keyword
+	def FechaActual2() {
+		Date ahora = new Date();
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yy");
+		return formateador.format(ahora);
+	}
 }

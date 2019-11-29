@@ -9,4 +9,29 @@
       <initValue>'http://10.3.3.202:14241/elab_7.4/servlet/login'</initValue>
       <name>url</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'10.3.3.203'</initValue>
+      <name>urlDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'1521'</initValue>
+      <name>portDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'ELAB ORACLE TEST'</initValue>
+      <name>nameDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'gxmsp'</initValue>
+      <name>userDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'gxmsp'</initValue>
+      <name>passwordDB</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

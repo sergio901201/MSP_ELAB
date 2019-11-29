@@ -10,16 +10,18 @@
    <driver>InternalData</driver>
    <data>ADMIN EI86VE8cmBqVGR3CvTRAKg%3D%3D</data>
    <data>RECEPCION EI86VE8cmBqVGR3CvTRAKg%3D%3D</data>
-   <data>null null</data>
+   <data>VIROLOGIA EI86VE8cmBqVGR3CvTRAKg%3D%3D</data>
+   <data>PARASITOLOGIA EI86VE8cmBqVGR3CvTRAKg%3D%3D</data>
+   <data>PRESTADOR1 EI86VE8cmBqVGR3CvTRAKg%3D%3D</data>
    <internalDataColumns>
       <columnIndex>0</columnIndex>
       <name>username</name>
-      <size>3</size>
+      <size>5</size>
    </internalDataColumns>
    <internalDataColumns>
       <columnIndex>1</columnIndex>
       <name>password</name>
-      <size>3</size>
+      <size>5</size>
    </internalDataColumns>
    <isInternalPath>false</isInternalPath>
    <query></query>

@@ -34,7 +34,7 @@ public class SQLConnect {
 	@Keyword
 	def connectDB(String url, String port, String dbname, String username, String password){
 		//Load driver class for your specific database type
-		String conn = "jdbc:oracle:thin:" + "@" + url + ":" + port + ":xe"
+		String conn = "jdbc:oracle:thin:" + "@" + url + ":" + port + ":TEST"
 		if(connection != null && !connection.isClosed()){
 			connection.close()
 		}

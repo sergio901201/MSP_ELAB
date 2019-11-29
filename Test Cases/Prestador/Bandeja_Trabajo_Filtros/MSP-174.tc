@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-174</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>61dd18e8-2271-44a2-a4ce-1933a04893a7</testCaseGuid>
+   <variable>
+      <defaultValue>'abc'</defaultValue>
+      <description></description>
+      <id>7758423d-3013-4f47-a771-07b86558749b</id>
+      <masked>false</masked>
+      <name>fecha</name>
+   </variable>
+</TestCaseEntity>
