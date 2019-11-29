@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-13</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>405ac524-1fbe-4b69-8b3b-bb57b571d931</testCaseGuid>
+   <variable>
+      <defaultValue>['1430', '1230', '105', '750', '1440', '170']</defaultValue>
+      <description></description>
+      <id>465f91ae-1d55-410f-bb0e-2603b11330da</id>
+      <masked>false</masked>
+      <name>codigo</name>
+   </variable>
+   <variable>
+      <defaultValue>'43'</defaultValue>
+      <description></description>
+      <id>1b4cfb28-b6b6-4381-a476-9cb4da02e629</id>
+      <masked>false</masked>
+      <name>Pais</name>
+   </variable>
+   <variable>
+      <defaultValue>'15846914'</defaultValue>
+      <description></description>
+      <id>bf4f527c-e1e1-4ad0-a0b2-b17b50fcd8eb</id>
+      <masked>false</masked>
+      <name>NoDoc</name>
+   </variable>
+</TestCaseEntity>

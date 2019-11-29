@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP- 9</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>1da0da3d-f0ae-4e9a-a9e2-4cad490226ab</testCaseGuid>
+   <variable>
+      <defaultValue>'43'</defaultValue>
+      <description></description>
+      <id>3e3e19aa-fb71-4c81-ba4a-920ceb87a857</id>
+      <masked>false</masked>
+      <name>Pais</name>
+   </variable>
+   <variable>
+      <defaultValue>'19771915'</defaultValue>
+      <description></description>
+      <id>280df07f-4167-4504-af73-309d1c294526</id>
+      <masked>false</masked>
+      <name>NoDoc</name>
+   </variable>
+   <variable>
+      <defaultValue>['101', '102', '104', '120', '1450', '700', '850', '630', '1000', '1821', '640', '301', '302', '303', '350', '360']</defaultValue>
+      <description></description>
+      <id>ae7adb43-d7a2-4567-bfc3-68ca31614a56</id>
+      <masked>false</masked>
+      <name>codigo</name>
+   </variable>
+</TestCaseEntity>

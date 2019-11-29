@@ -4,7 +4,7 @@
    <name>RECEPCION</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <mailRecipient></mailRecipient>
+   <mailRecipient>Yailema.Medinilla@arnaldocastro.com.uy;Sergio.Dominguez@arnaldocastro.com.uy;</mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
@@ -296,7 +296,7 @@
       <guid>6a803de9-7ef7-4f81-8493-fef0a8afe80d</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Coprocultivo/MSP-27</testCaseId>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Coprocultivo/MSP-28</testCaseId>
       <variableLink>
          <testDataLinkId></testDataLinkId>
          <type>DEFAULT</type>
@@ -380,7 +380,7 @@
       <guid>fd9412ce-eb43-4bec-b770-28ea7854908e</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Moleculares/MSP-15</testCaseId>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Moleculares/MSP-16</testCaseId>
       <variableLink>
          <testDataLinkId></testDataLinkId>
          <type>DEFAULT</type>
@@ -699,5 +699,209 @@
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
       <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_VIHMenoresVirologia121/MSP-381</testCaseId>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>f0fab30b-84d5-4ef6-886c-aa0252b8020b</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Micoparainmuno/MSP- 9</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>3e3e19aa-fb71-4c81-ba4a-920ceb87a857</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>280df07f-4167-4504-af73-309d1c294526</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>ae7adb43-d7a2-4567-bfc3-68ca31614a56</variableId>
+      </variableLink>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>51056c2e-3a2a-4c24-95e6-8be76efa1cfd</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud/MSP-21</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>72e4f493-6e20-4cf5-b640-2a8efc499d02</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>8b2517c3-0776-456b-8aa7-a12b41351e96</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>24e347bf-0864-4e59-aa1f-1dbb6ea2fc37</variableId>
+      </variableLink>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>38462371-edf4-4ac9-a183-019cef27890a</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Cepas/MSP-1</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>7b5dce36-7b50-41db-9c2c-aaeb64ed1729</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>eb5bc2c2-6e1e-43c1-a215-7d9835cf5060</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>749f31dd-0da8-4d32-a91e-291f2c4af9a5</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>b020d383-e8ca-493b-a780-e0434f0b37bf</variableId>
+      </variableLink>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>dc0091ee-bfbd-418a-bab9-cf9a8f5eac42</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Coprocultivo/MSP-25</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>763b2e90-6ba3-42b0-934a-651eb5d46a40</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>e15bd179-0995-4edc-8432-15e424d2874b</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>6a33a319-6368-425e-853e-7bef6ff073c1</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>d23bd3fa-5312-4fac-b8ae-0ba8de74711f</variableId>
+      </variableLink>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>3f413ee2-ba0c-4bb2-8b2f-8abbf592623f</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Micoparafung/MSP-5</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>30d22236-c349-404f-88cb-856f3d007bde</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>4830c103-e5cf-4fd9-ad2c-7b912b9f4fbb</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>e959b9f9-0a1c-40ee-bc8e-d6dca934dd05</variableId>
+      </variableLink>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>5e1821ba-3d3e-4671-bcb7-9666d13c48a6</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Moleculares/MSP-13</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>465f91ae-1d55-410f-bb0e-2603b11330da</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>1b4cfb28-b6b6-4381-a476-9cb4da02e629</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>bf4f527c-e1e1-4ad0-a0b2-b17b50fcd8eb</variableId>
+      </variableLink>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>cb280de2-85a9-4184-b5ce-53851698d48f</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_Tosconvulsa/MSP-17</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>198aec38-533d-4723-926a-520591819813</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>312acd86-812c-4505-b8c9-54f454a37f43</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>4afe80f1-70ae-4f9e-955e-b50dba7f4598</variableId>
+      </variableLink>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>40420c06-e4b5-4afc-9af9-bb7ccacc9b09</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Recepcion/Formulario_Solicitud_VIHMayoresVirologia120/MSP-415</testCaseId>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>0c32311a-4dff-4acd-bba3-a2c445b38faa</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>3563966c-cc15-4034-8f16-eadb09221f0a</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>6737624c-0dce-4a30-9f38-104a8791221c</variableId>
+      </variableLink>
    </testCaseLink>
 </TestSuiteEntity>

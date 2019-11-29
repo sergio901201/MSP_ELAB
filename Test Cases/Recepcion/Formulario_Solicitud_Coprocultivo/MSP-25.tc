@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>MSP-1</name>
+   <name>MSP-25</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>b8b8add5-b126-4c27-9852-f20084230153</testCaseGuid>
+   <testCaseGuid>1821986d-52e1-43a1-80c4-81783c774912</testCaseGuid>
    <variable>
-      <defaultValue>'3200'</defaultValue>
+      <defaultValue>'3100'</defaultValue>
       <description></description>
-      <id>7b5dce36-7b50-41db-9c2c-aaeb64ed1729</id>
+      <id>763b2e90-6ba3-42b0-934a-651eb5d46a40</id>
       <masked>false</masked>
       <name>codigo1</name>
    </variable>
    <variable>
-      <defaultValue>'2330'</defaultValue>
+      <defaultValue>'2026'</defaultValue>
       <description></description>
-      <id>eb5bc2c2-6e1e-43c1-a215-7d9835cf5060</id>
+      <id>e15bd179-0995-4edc-8432-15e424d2874b</id>
       <masked>false</masked>
       <name>codigo2</name>
    </variable>
    <variable>
       <defaultValue>'43'</defaultValue>
       <description></description>
-      <id>749f31dd-0da8-4d32-a91e-291f2c4af9a5</id>
+      <id>6a33a319-6368-425e-853e-7bef6ff073c1</id>
       <masked>false</masked>
       <name>Pais</name>
    </variable>
    <variable>
-      <defaultValue>'18649971'</defaultValue>
+      <defaultValue>'18055976'</defaultValue>
       <description></description>
-      <id>b020d383-e8ca-493b-a780-e0434f0b37bf</id>
+      <id>d23bd3fa-5312-4fac-b8ae-0ba8de74711f</id>
       <masked>false</masked>
       <name>NoDoc</name>
    </variable>

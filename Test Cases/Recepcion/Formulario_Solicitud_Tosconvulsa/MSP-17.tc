@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-17</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>f131ab3e-b499-430e-a849-baed321c079f</testCaseGuid>
+   <variable>
+      <defaultValue>'2015'</defaultValue>
+      <description></description>
+      <id>198aec38-533d-4723-926a-520591819813</id>
+      <masked>false</masked>
+      <name>codigo1</name>
+   </variable>
+   <variable>
+      <defaultValue>'43'</defaultValue>
+      <description></description>
+      <id>312acd86-812c-4505-b8c9-54f454a37f43</id>
+      <masked>false</masked>
+      <name>Pais</name>
+   </variable>
+   <variable>
+      <defaultValue>'14240428'</defaultValue>
+      <description></description>
+      <id>4afe80f1-70ae-4f9e-955e-b50dba7f4598</id>
+      <masked>false</masked>
+      <name>NoDoc</name>
+   </variable>
+</TestCaseEntity>

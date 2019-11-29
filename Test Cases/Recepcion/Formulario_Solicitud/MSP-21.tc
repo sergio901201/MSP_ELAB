@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-21</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>9a256404-3e2b-40f6-b2d5-54478fa5061c</testCaseGuid>
+   <variable>
+      <defaultValue>'2005'</defaultValue>
+      <description></description>
+      <id>72e4f493-6e20-4cf5-b640-2a8efc499d02</id>
+      <masked>false</masked>
+      <name>codigo1</name>
+   </variable>
+   <variable>
+      <defaultValue>'43'</defaultValue>
+      <description></description>
+      <id>8b2517c3-0776-456b-8aa7-a12b41351e96</id>
+      <masked>false</masked>
+      <name>Pais</name>
+   </variable>
+   <variable>
+      <defaultValue>'19482035'</defaultValue>
+      <description></description>
+      <id>24e347bf-0864-4e59-aa1f-1dbb6ea2fc37</id>
+      <masked>false</masked>
+      <name>NoDoc</name>
+   </variable>
+</TestCaseEntity>

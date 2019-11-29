@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-5</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>31fb1cce-ac1c-4d8d-9171-5e863bc6103f</testCaseGuid>
+   <variable>
+      <defaultValue>'401'</defaultValue>
+      <description></description>
+      <id>30d22236-c349-404f-88cb-856f3d007bde</id>
+      <masked>false</masked>
+      <name>codigo1</name>
+   </variable>
+   <variable>
+      <defaultValue>'43'</defaultValue>
+      <description></description>
+      <id>4830c103-e5cf-4fd9-ad2c-7b912b9f4fbb</id>
+      <masked>false</masked>
+      <name>Pais</name>
+   </variable>
+   <variable>
+      <defaultValue>'17524499'</defaultValue>
+      <description></description>
+      <id>e959b9f9-0a1c-40ee-bc8e-d6dca934dd05</id>
+      <masked>false</masked>
+      <name>NoDoc</name>
+   </variable>
+</TestCaseEntity>
