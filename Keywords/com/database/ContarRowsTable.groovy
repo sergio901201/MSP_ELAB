@@ -25,7 +25,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 public class ContarRowsTable {
 	@Keyword
 	def contarrows(){
-		int nFilas = WebUI.executeJavaScript('return $("#SolicitudesContainerTbl").length;', null)
+		int nFilas = WebUI.executeJavaScript('return $("#SolicitudesContainerTbl tbody tr").length;', null)
 		return nFilas
 	}
 }

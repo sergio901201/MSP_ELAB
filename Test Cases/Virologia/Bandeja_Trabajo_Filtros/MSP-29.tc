@@ -6,9 +6,9 @@
    <comment></comment>
    <testCaseGuid>7c28377e-1213-4825-86ca-a6cc39573ceb</testCaseGuid>
    <variable>
-      <defaultValue>'abc'</defaultValue>
+      <defaultValue>'29/09/2019'</defaultValue>
       <description></description>
-      <id>dc08cbaf-eeb8-4a04-8b01-ea8ebf2bf398</id>
+      <id>af0d3385-e815-4ad0-931e-ae5ec9631521</id>
       <masked>false</masked>
       <name>fecha</name>
    </variable>
