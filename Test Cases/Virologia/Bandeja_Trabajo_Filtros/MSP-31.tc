@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-31</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>0c00de76-0f7f-4f19-99f0-2c2d309ad714</testCaseGuid>
+   <variable>
+      <defaultValue>'01/01/2019'</defaultValue>
+      <description></description>
+      <id>d998faa8-fc36-4669-80da-75e62fcac74e</id>
+      <masked>false</masked>
+      <name>fechaD</name>
+   </variable>
+   <variable>
+      <defaultValue>'30/09/2019'</defaultValue>
+      <description></description>
+      <id>70e1905a-4eed-44e8-b19b-8f82435e1549</id>
+      <masked>false</masked>
+      <name>fechaH</name>
+   </variable>
+</TestCaseEntity>

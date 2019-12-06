@@ -49,39 +49,49 @@ WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/td_Bande
 
 WebUI.delay(2)
 
-String cadena = fecha
-String dia = cadena.substring(0, 2)
-String mes = cadena.substring(3, 5)
-String año = cadena.substring(6, 10)
-String añocorto = cadena.substring(8, 10)
-String fechadesde = (((dia + '/') + mes) + '/') + añocorto
-String fechaBD = (((año + '-') + mes) + '-') + dia
+String cadenaD = fechaD
+String diaD = cadenaD.substring(0, 2)
+String mesD = cadenaD.substring(3, 5)
+String añoD = cadenaD.substring(6, 10)
+String añocortoD = cadenaD.substring(8, 10)
+String fechadesde = diaD + '/' + mesD + '/' + añocortoD
+String fechaBDD = añoD + '-' + mesD + '-' + diaD
+
+String cadenaH = fechaH
+String diaH = cadenaH.substring(0, 2)
+String mesH = cadenaH.substring(3, 5)
+String añoH = cadenaH.substring(6, 10)
+String añocortoH = cadenaH.substring(8, 10)
+String fechahasta = diaH + '/' + mesH + '/' + añocortoH
+String fechaBDH = añoH + '-' + mesH + '-' + diaH
 
 //Insert variable fecha in FechaDesde
-WebUI.executeJavaScript(('$("#vFECHADESDE").val("' + fechadesde) + '");', null)
-
-WebUI.delay(2)
+WebUI.executeJavaScript('$("#vFECHADESDE").val("' + fechadesde + '");', null)
 
 //Press Tab
 WebUI.sendKeys(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/input_Fecha desde_vFECHADESDE'), 
     Keys.chord(Keys.TAB))
 
-WebUI.delay(2)
+//Select Fecha Hasta
+WebUI.executeJavaScript('$("#vFECHAHASTA").val("' + fechahasta + '");', null)
 
 //Select Estado Todos
 WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("");', null)
 
-WebUI.delay(2)
+//Create Data Internal from Sector
+InternalData IDSector = findTestData('Data Files/VIROLOGIA/Internal Data Sector')
+
+String Sector = IDSector.getValue(1, 9)
+
+//Click Object Sector
+WebUI.selectOptionByValue(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/select_Toda la Unidad'), Sector, true)
+println ("El Sector seleccionado es:" + Sector)
 
 //click buton filtro (Lupa)
 WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/img_Sector_IMAGE1'))
 
-WebUI.delay(2)
-
 CRUD crud = new CRUD()
-String[] resultFC = crud.FiltroFechaVirologia(fechaBD, "")
-
-WebUI.delay(2)
+String[] resultFC = crud.FiltroSectorVirologia(fechaBDD, fechaBDH, Sector)
 
 boolean filtroF;
 int pos = 1
@@ -97,10 +107,10 @@ if(resultFC != null){
 				ElemTable = WebUI.executeJavaScript('return $("#span_vSOL_FECHAHORA_00'+pos+'").text();', null)
 				WebUI.executeJavaScript('$("#span_vSOL_FECHAHORA_00'+pos+'").css("color", "#fff");', null)
 		}
-		
 		ElemTable = ElemTable.substring(0, 10)
 		println ("!!!El valor $i es:" + resultFC[i])
 		println ("!!!El Elemento JavaScript $i es:" + ElemTable)
+		
 		if(!resultFC[i].equals(ElemTable))
 			{
 			filtroF = false
@@ -108,7 +118,7 @@ if(resultFC != null){
 		println ("El valor de la booleana es:" + filtroF)
 		if(pos == 30){
 			pos = 0
-			WebUI.executeJavaScript('$("#SolicitudesContainerTbl tfoot tr td div button.PagingButtonsNext").click()', null)
+			WebUI.click(findTestObject('Object Repository/Virologia/Page_Bandeja de trabajo de Unidades/button_Estndar_PagingButtonsNext'))
 			WebUI.delay(5)
 		}
 		pos = pos + 1
@@ -121,7 +131,7 @@ if(resultFC != null){
 }
 
 if (filtroF) {
-    println('El filtro Fecha Desde funciona correctamente, Prueba Correcta')
+    println('El filtro Sector funciona correctamente, Prueba Correcta')
 } else {
     throw new Exception('Prueba Incorrecta')
 }

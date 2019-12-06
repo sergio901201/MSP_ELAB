@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description>Aquí se almacenan todos los Estados para una Solicitud</description>
+   <name>Internal Data Estado</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>ba876ebd-9ca5-4c2c-8ad7-32a7ec5e7fab</dataFileGUID>
+   <dataSourceUrl></dataSourceUrl>
+   <driver>InternalData</driver>
+   <data>E Enviado</data>
+   <data>R Recibido</data>
+   <data>P En+Proceso</data>
+   <data>F Finalizado</data>
+   <data>T En+Transito</data>
+   <data>A Anulado</data>
+   <internalDataColumns>
+      <columnIndex>0</columnIndex>
+      <name>ID</name>
+      <size>6</size>
+   </internalDataColumns>
+   <internalDataColumns>
+      <columnIndex>1</columnIndex>
+      <name>NOMBRE</name>
+      <size>6</size>
+   </internalDataColumns>
+   <isInternalPath>false</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName></sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

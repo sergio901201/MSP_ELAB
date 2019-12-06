@@ -13,6 +13,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testdata.InternalData as InternalData
+import com.kms.katalon.core.testdata.ExcelData as ExcelData
 import com.kms.katalon.core.testobject.RequestObject as RequestObject
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.testobject.TestObjectProperty as TestObjectProperty
@@ -30,6 +31,14 @@ import java.text.SimpleDateFormat as SimpleDateFormat
 import java.util.Date as Date
 
 InternalData ID = findTestData('Data Files/Internal Data Login')
+
+ExcelData ED = findTestData('Data Files/VIROLOGIA/DataBase Data Prestador')
+
+//Select ID para HOSPITAL PATEUR para enviarlo a la Consulta de la BD
+String prestadorID = ED.getValue(1,7)
+
+//Select NOMBRE para HOSPITAL PATEUR para utilizarlo en el filtrado de la vista
+String prestadorNombre = ED.getValue(3,7)
 
 WebUI.callTestCase(findTestCase('Login'), [('User') : ID.getValue(1, 3), ('Password') : ID.getValue(2, 3)], FailureHandling.STOP_ON_FAILURE)
 
@@ -49,39 +58,43 @@ WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/td_Bande
 
 WebUI.delay(2)
 
-String cadena = fecha
-String dia = cadena.substring(0, 2)
-String mes = cadena.substring(3, 5)
-String año = cadena.substring(6, 10)
-String añocorto = cadena.substring(8, 10)
-String fechadesde = (((dia + '/') + mes) + '/') + añocorto
-String fechaBD = (((año + '-') + mes) + '-') + dia
+String cadenaD = fechaD
+String diaD = cadenaD.substring(0, 2)
+String mesD = cadenaD.substring(3, 5)
+String añoD = cadenaD.substring(6, 10)
+String añocortoD = cadenaD.substring(8, 10)
+String fechadesde = diaD + '/' + mesD + '/' + añocortoD
+String fechaBDD = añoD + '-' + mesD + '-' + diaD
+
+String cadenaH = fechaH
+String diaH = cadenaH.substring(0, 2)
+String mesH = cadenaH.substring(3, 5)
+String añoH = cadenaH.substring(6, 10)
+String añocortoH = cadenaH.substring(8, 10)
+String fechahasta = diaH + '/' + mesH + '/' + añocortoH
+String fechaBDH = añoH + '-' + mesH + '-' + diaH
 
 //Insert variable fecha in FechaDesde
-WebUI.executeJavaScript(('$("#vFECHADESDE").val("' + fechadesde) + '");', null)
-
-WebUI.delay(2)
+WebUI.executeJavaScript('$("#vFECHADESDE").val("' + fechadesde + '");', null)
 
 //Press Tab
 WebUI.sendKeys(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/input_Fecha desde_vFECHADESDE'), 
     Keys.chord(Keys.TAB))
 
-WebUI.delay(2)
+//Select Fecha Hasta
+WebUI.executeJavaScript('$("#vFECHAHASTA").val("' + fechahasta + '");', null)
 
 //Select Estado Todos
 WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("");', null)
 
-WebUI.delay(2)
+//Insert Prestador con Hospital Pasteur
+WebUI.setText(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/input_Prestador_vORG_ID'), prestadorNombre)
 
 //click buton filtro (Lupa)
 WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/img_Sector_IMAGE1'))
 
-WebUI.delay(2)
-
 CRUD crud = new CRUD()
-String[] resultFC = crud.FiltroFechaVirologia(fechaBD, "")
-
-WebUI.delay(2)
+String[] resultFC = crud.FiltroPrestadorVirologia(fechaBDD, fechaBDH, prestadorID)
 
 boolean filtroF;
 int pos = 1
@@ -97,10 +110,10 @@ if(resultFC != null){
 				ElemTable = WebUI.executeJavaScript('return $("#span_vSOL_FECHAHORA_00'+pos+'").text();', null)
 				WebUI.executeJavaScript('$("#span_vSOL_FECHAHORA_00'+pos+'").css("color", "#fff");', null)
 		}
-		
 		ElemTable = ElemTable.substring(0, 10)
 		println ("!!!El valor $i es:" + resultFC[i])
 		println ("!!!El Elemento JavaScript $i es:" + ElemTable)
+		
 		if(!resultFC[i].equals(ElemTable))
 			{
 			filtroF = false
@@ -108,7 +121,7 @@ if(resultFC != null){
 		println ("El valor de la booleana es:" + filtroF)
 		if(pos == 30){
 			pos = 0
-			WebUI.executeJavaScript('$("#SolicitudesContainerTbl tfoot tr td div button.PagingButtonsNext").click()', null)
+			WebUI.click(findTestObject('Object Repository/Virologia/Page_Bandeja de trabajo de Unidades/button_Estndar_PagingButtonsNext'))
 			WebUI.delay(5)
 		}
 		pos = pos + 1
@@ -121,7 +134,7 @@ if(resultFC != null){
 }
 
 if (filtroF) {
-    println('El filtro Fecha Desde funciona correctamente, Prueba Correcta')
+    println('El filtro Prestador funciona correctamente, Prueba Correcta')
 } else {
     throw new Exception('Prueba Incorrecta')
 }

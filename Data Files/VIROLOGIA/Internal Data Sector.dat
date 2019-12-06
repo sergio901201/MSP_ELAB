@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description>Datos Internos dentro del Módulo de Virología, Filtro Sector</description>
+   <name>Internal Data Sector</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>f22a5f61-7122-42f0-ba7f-3151c69a0c2f</dataFileGUID>
+   <dataSourceUrl></dataSourceUrl>
+   <driver>InternalData</driver>
+   <data>0 Toda+la+Unidad</data>
+   <data>35 DET+DE+VIRUS+TRANSM++POR+SANGRE+EN+HEMODERIVADOS</data>
+   <data>33 ERUPTIVAS+FEBRILES</data>
+   <data>28 GASTROENTERITIS+VIRALES</data>
+   <data>27 INMUNOPREVENIBLES+VIRALES</data>
+   <data>29 MENINGOENCEFALITIS+VIRALES</data>
+   <data>34 SECUENCIACI%C3%93N+DE+%C3%81CIDOS+NUCLEICOS+VIRALES</data>
+   <data>11 VIH+BIOLOG%C3%8DA+MOLECULAR</data>
+   <data>10 VIH+SEROLOG%C3%8DA</data>
+   <data>17 VIRUS+DE+HEPATITIS</data>
+   <data>16 VIRUS+EMERGENTES%2FREEMERGENTES</data>
+   <data>20 VIRUS+RESPIRATORIOS</data>
+   <internalDataColumns>
+      <columnIndex>0</columnIndex>
+      <name>ID</name>
+      <size>12</size>
+   </internalDataColumns>
+   <internalDataColumns>
+      <columnIndex>1</columnIndex>
+      <name>SECTOR</name>
+      <size>12</size>
+   </internalDataColumns>
+   <isInternalPath>false</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName></sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

@@ -28,4 +28,34 @@ public class ContarRowsTable {
 		int nFilas = WebUI.executeJavaScript('return $("#SolicitudesContainerTbl tbody tr").length;', null)
 		return nFilas
 	}
+	
+	@Keyword
+	def TipoDocumentoPaciente(String paciente){
+		switch (paciente) {
+		case "CC":
+			return 102
+			break;
+		case "CI":
+			return 1
+			break;
+		case "DNI":
+			return 2
+			break;
+		case "LE":
+			return 104
+			break;
+		case "LN":
+			return 105
+			break;
+		case "NV":
+			return 101
+			break;
+		case "P":
+			return 201
+			break;
+		case "SD":
+			return 107
+			break;
+			}	
+	}
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-38</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>f14f777e-fc90-4925-8494-919646b6f326</testCaseGuid>
+   <variable>
+      <defaultValue>'04/12/2018'</defaultValue>
+      <description></description>
+      <id>2e37a137-55bb-40d4-81d3-581ac1c5d279</id>
+      <masked>false</masked>
+      <name>fechaD</name>
+   </variable>
+   <variable>
+      <defaultValue>'05/12/2019'</defaultValue>
+      <description></description>
+      <id>039dcda0-4375-4d4a-9fa8-d9129be4e7ec</id>
+      <masked>false</masked>
+      <name>fechaH</name>
+   </variable>
+</TestCaseEntity>

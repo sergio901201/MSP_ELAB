@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description>Datos internos sobre el Estado del Estudio en el sector Virología</description>
+   <name>Internal Data EstadoEstudio</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>9ca9c45b-0cfb-400f-b050-482c4513fade</dataFileGUID>
+   <dataSourceUrl></dataSourceUrl>
+   <driver>InternalData</driver>
+   <data>0 %28todos%29</data>
+   <data>1 Validado</data>
+   <data>2 En+Proceso</data>
+   <data>3 Liberado</data>
+   <data>4 Visualizado+Impreso</data>
+   <data>5 Ingresado</data>
+   <data>6 Pre-Facturado</data>
+   <data>7 Descartado</data>
+   <data>8 Liberado+para+Visualizar</data>
+   <data>9 Pendiente</data>
+   <internalDataColumns>
+      <columnIndex>0</columnIndex>
+      <name>ID</name>
+      <size>10</size>
+   </internalDataColumns>
+   <internalDataColumns>
+      <columnIndex>1</columnIndex>
+      <name>NOMBRE</name>
+      <size>10</size>
+   </internalDataColumns>
+   <isInternalPath>false</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName></sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>
