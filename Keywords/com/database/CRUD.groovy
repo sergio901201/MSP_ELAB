@@ -129,10 +129,10 @@ public class CRUD {
 			}
 		}
 		if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-		
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
+
 		return fd
 	}
 
@@ -196,10 +196,10 @@ public class CRUD {
 			}
 		}
 		if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-		
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
+
 		return fd
 	}
 
@@ -260,10 +260,10 @@ public class CRUD {
 			}
 		}
 		if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-		
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
+
 		return fd
 	}
 
@@ -324,10 +324,10 @@ public class CRUD {
 			}
 		}
 		if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-		
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
+
 		return fd
 	}
 
@@ -394,10 +394,10 @@ public class CRUD {
 			}
 		}
 		if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-		
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
+
 		return fd
 	}
 
@@ -471,270 +471,625 @@ public class CRUD {
 	}
 
 	/** Verify Filtro Estudio in Virologia funciona ok para una Fecha desde y Fecha hasta
-	*/
-   @Keyword
-   def FiltroEstudioVirologia(String fechaD, String fechaH, String estudio){
-	   String Resultadofinal = ""
-	   String [] fd
-	   SQLConnect conexion = new SQLConnect();
-	   conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
-	   /**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
-	   String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') ORDER BY SOL_FECHAHORA")
-	   ResultSet resultado = conexion.executeQuery(query)
-	   Object solicitudID = null
-	   while(resultado.next()){
-		   solicitudID = resultado.getObject("SOL_ID")
-		   println ("El Id de la Solicitud es:" + solicitudID)
+	 */
+	@Keyword
+	def FiltroEstudioVirologia(String fechaD, String fechaH, String estudio){
+		String Resultadofinal = ""
+		String [] fd
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
+		String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') ORDER BY SOL_FECHAHORA")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
 
-		   /**Obtener los IDs del Estudio para la solicitudID*/
-		   String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' AND SOL_ESTUDIOID = '" + estudio + "'")
-		   ResultSet resultado2 = conexion.executeQuery(query2)
-		   Object Estudio = null
-		   while(resultado2.next()){
-			   Estudio = resultado2.getObject("SOL_ESTUDIOID")
-			   println ("El Id del Estudio es:" + Estudio)
+			/**Obtener los IDs del Estudio para la solicitudID*/
+			String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' AND SOL_ESTUDIOID = '" + estudio + "'")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			while(resultado2.next()){
+				Estudio = resultado2.getObject("SOL_ESTUDIOID")
+				println ("El Id del Estudio es:" + Estudio)
 
-			   /**Obtener el ID del Sector para el Estudio*/
-			   String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
-			   ResultSet resultado3 = conexion.executeQuery(query3)
-			   Object Sector = null
-			   while(resultado3.next()){
-				   Sector = resultado3.getObject("EST_SEC_ID")
-				   println ("El Id del Sector es:" + Sector)
+				/**Obtener el ID del Sector para el Estudio*/
+				String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
+				ResultSet resultado3 = conexion.executeQuery(query3)
+				Object Sector = null
+				while(resultado3.next()){
+					Sector = resultado3.getObject("EST_SEC_ID")
+					println ("El Id del Sector es:" + Sector)
 
-				   /**Obtener el ID de la Unidad para el SectorID*/
-				   String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
-				   ResultSet resultado4 = conexion.executeQuery(query4)
-				   Object Unidad = null
-				   while(resultado4.next()){
-					   Unidad = resultado4.getObject("SEC_UNI_ID")
-					   println ("El Id de la Unidad es:" + Unidad)
-					   String cadena = ""
-					   if(Unidad == 1){
-						   cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
-						   String dia = cadena.substring(8, 10)
-						   String mes = cadena.substring(5, 7)
-						   String año = cadena.substring(0, 4)
-						   String fechadesde = dia + '/' + mes + '/' + año
-						   println ("El fecha desde es:" + fechadesde)
-						   Resultadofinal = Resultadofinal + " " + fechadesde
-						   println ("La cadena es:" + cadena)
-						   println ("El Resultado Final es:" + Resultadofinal)
-					   }
-				   }
-			   }
-		   }
-	   }
-	   println ("La longitud es:" + Resultadofinal.length())
-	   if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-	   
-	   return fd
-   }
+					/**Obtener el ID de la Unidad para el SectorID*/
+					String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
+					ResultSet resultado4 = conexion.executeQuery(query4)
+					Object Unidad = null
+					while(resultado4.next()){
+						Unidad = resultado4.getObject("SEC_UNI_ID")
+						println ("El Id de la Unidad es:" + Unidad)
+						String cadena = ""
+						if(Unidad == 1){
+							cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
+							String dia = cadena.substring(8, 10)
+							String mes = cadena.substring(5, 7)
+							String año = cadena.substring(0, 4)
+							String fechadesde = dia + '/' + mes + '/' + año
+							println ("El fecha desde es:" + fechadesde)
+							Resultadofinal = Resultadofinal + " " + fechadesde
+							println ("La cadena es:" + cadena)
+							println ("El Resultado Final es:" + Resultadofinal)
+						}
+					}
+				}
+			}
+		}
+		println ("La longitud es:" + Resultadofinal.length())
+		if(Resultadofinal.length() != 0){
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
 
-   /** Verify Filtro Estudio in Virologia funciona ok para una Fecha desde y Fecha hasta
-	*/
-   @Keyword
-   def FiltroPrestadorVirologia(String fechaD, String fechaH, String prestador){
-	   String Resultadofinal = ""
-	   String [] fd
-	   SQLConnect conexion = new SQLConnect();
-	   conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
-	   /**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
-	   String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_ORGANIZACIONID = '"+prestador+"' ORDER BY SOL_FECHAHORA")
-	   ResultSet resultado = conexion.executeQuery(query)
-	   Object solicitudID = null
-	   while(resultado.next()){
-		   solicitudID = resultado.getObject("SOL_ID")
-		   println ("El Id de la Solicitud es:" + solicitudID)
+		return fd
+	}
 
-		   /**Obtener los IDs del Estudio para la solicitudID*/
-		   String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' ")
-		   ResultSet resultado2 = conexion.executeQuery(query2)
-		   Object Estudio = null
-		   while(resultado2.next()){
-			   Estudio = resultado2.getObject("SOL_ESTUDIOID")
-			   println ("El Id del Estudio es:" + Estudio)
+	/** Verify Filtro Estudio in Virologia funciona ok para una Fecha desde y Fecha hasta
+	 */
+	@Keyword
+	def FiltroPrestadorVirologia(String fechaD, String fechaH, String prestador){
+		String Resultadofinal = ""
+		String [] fd
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
+		String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_ORGANIZACIONID = '"+prestador+"' ORDER BY SOL_FECHAHORA")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
 
-			   /**Obtener el ID del Sector para el Estudio*/
-			   String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
-			   ResultSet resultado3 = conexion.executeQuery(query3)
-			   Object Sector = null
-			   while(resultado3.next()){
-				   Sector = resultado3.getObject("EST_SEC_ID")
-				   println ("El Id del Sector es:" + Sector)
+			/**Obtener los IDs del Estudio para la solicitudID*/
+			String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			while(resultado2.next()){
+				Estudio = resultado2.getObject("SOL_ESTUDIOID")
+				println ("El Id del Estudio es:" + Estudio)
 
-				   /**Obtener el ID de la Unidad para el SectorID*/
-				   String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
-				   ResultSet resultado4 = conexion.executeQuery(query4)
-				   Object Unidad = null
-				   while(resultado4.next()){
-					   Unidad = resultado4.getObject("SEC_UNI_ID")
-					   println ("El Id de la Unidad es:" + Unidad)
-					   String cadena = ""
-					   if(Unidad == 1){
-						   cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
-						   String dia = cadena.substring(8, 10)
-						   String mes = cadena.substring(5, 7)
-						   String año = cadena.substring(0, 4)
-						   String fechadesde = dia + '/' + mes + '/' + año
-						   println ("El fecha desde es:" + fechadesde)
-						   Resultadofinal = Resultadofinal + " " + fechadesde
-						   println ("La cadena es:" + cadena)
-						   println ("El Resultado Final es:" + Resultadofinal)
-					   }
-				   }
-			   }
-		   }
-	   }
-	   println ("La longitud es:" + Resultadofinal.length())
-	   if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-	   
-	   return fd
-   }
+				/**Obtener el ID del Sector para el Estudio*/
+				String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
+				ResultSet resultado3 = conexion.executeQuery(query3)
+				Object Sector = null
+				while(resultado3.next()){
+					Sector = resultado3.getObject("EST_SEC_ID")
+					println ("El Id del Sector es:" + Sector)
 
-   /** Verify Filtro No de Solicitud in Virologia funciona ok para una Fecha desde y Fecha hasta
-	*/
-   @Keyword
-   def FiltroSolicitudVirologia(String fechaD, String fechaH, String solicitud){
-	   String Resultadofinal = ""
-	   String [] fd
-	   SQLConnect conexion = new SQLConnect();
-	   conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
-	   /**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
-	   String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+solicitud+"' ORDER BY SOL_FECHAHORA")
-	   ResultSet resultado = conexion.executeQuery(query)
-	   Object solicitudID = null
-	   while(resultado.next()){
-		   solicitudID = resultado.getObject("SOL_ID")
-		   println ("El Id de la Solicitud es:" + solicitudID)
+					/**Obtener el ID de la Unidad para el SectorID*/
+					String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
+					ResultSet resultado4 = conexion.executeQuery(query4)
+					Object Unidad = null
+					while(resultado4.next()){
+						Unidad = resultado4.getObject("SEC_UNI_ID")
+						println ("El Id de la Unidad es:" + Unidad)
+						String cadena = ""
+						if(Unidad == 1){
+							cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
+							String dia = cadena.substring(8, 10)
+							String mes = cadena.substring(5, 7)
+							String año = cadena.substring(0, 4)
+							String fechadesde = dia + '/' + mes + '/' + año
+							println ("El fecha desde es:" + fechadesde)
+							Resultadofinal = Resultadofinal + " " + fechadesde
+							println ("La cadena es:" + cadena)
+							println ("El Resultado Final es:" + Resultadofinal)
+						}
+					}
+				}
+			}
+		}
+		println ("La longitud es:" + Resultadofinal.length())
+		if(Resultadofinal.length() != 0){
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
 
-		   /**Obtener los IDs del Estudio para la solicitudID*/
-		   String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' ")
-		   ResultSet resultado2 = conexion.executeQuery(query2)
-		   Object Estudio = null
-		   while(resultado2.next()){
-			   Estudio = resultado2.getObject("SOL_ESTUDIOID")
-			   println ("El Id del Estudio es:" + Estudio)
+		return fd
+	}
 
-			   /**Obtener el ID del Sector para el Estudio*/
-			   String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
-			   ResultSet resultado3 = conexion.executeQuery(query3)
-			   Object Sector = null
-			   while(resultado3.next()){
-				   Sector = resultado3.getObject("EST_SEC_ID")
-				   println ("El Id del Sector es:" + Sector)
+	/** Verify Filtro No de Solicitud in Virologia funciona ok para una Fecha desde y Fecha hasta
+	 */
+	@Keyword
+	def FiltroSolicitudVirologia(String fechaD, String fechaH, String solicitud){
+		String Resultadofinal = ""
+		String [] fd
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
+		String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+solicitud+"' ORDER BY SOL_FECHAHORA")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
 
-				   /**Obtener el ID de la Unidad para el SectorID*/
-				   String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
-				   ResultSet resultado4 = conexion.executeQuery(query4)
-				   Object Unidad = null
-				   while(resultado4.next()){
-					   Unidad = resultado4.getObject("SEC_UNI_ID")
-					   println ("El Id de la Unidad es:" + Unidad)
-					   String cadena = ""
-					   if(Unidad == 1){
-						   cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
-						   String dia = cadena.substring(8, 10)
-						   String mes = cadena.substring(5, 7)
-						   String año = cadena.substring(0, 4)
-						   String fechadesde = dia + '/' + mes + '/' + año
-						   println ("El fecha desde es:" + fechadesde)
-						   Resultadofinal = Resultadofinal + " " + fechadesde
-						   println ("La cadena es:" + cadena)
-						   println ("El Resultado Final es:" + Resultadofinal)
-					   }
-				   }
-			   }
-		   }
-	   }
-	   println ("La longitud es:" + Resultadofinal.length())
-	   if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-	   
-	   return fd
-   }
+			/**Obtener los IDs del Estudio para la solicitudID*/
+			String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			while(resultado2.next()){
+				Estudio = resultado2.getObject("SOL_ESTUDIOID")
+				println ("El Id del Estudio es:" + Estudio)
 
-   /** Verify Filtro No de Solicitud in Virologia funciona ok para una Fecha desde y Fecha hasta
-	*/
-   @Keyword
-   def FiltroPacienteVirologia(String fechaD, String fechaH, String paciente){
-	   String Resultadofinal = ""
-	   String [] fd
-	   SQLConnect conexion = new SQLConnect();
-	   conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
-	   
-	   /**Obtener el Paciente para un pacienteID Y NroDocumento*/
-	   String query5 = String.format("SELECT PACIE_ID, PACIE_NRODOCUMENTO FROM PACIENTE WHERE PACIE_NRODOCUMENTO = '" + paciente + "' ")
-	   ResultSet resultado5 = conexion.executeQuery(query5)
-	   Object PacID = null
-	   if(resultado5.next()){
-		   PacID = resultado5.getObject("PACIE_ID")
-	   }
-	   
-	   /**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
-	   String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA, SOL_PACIENTEID FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_PACIENTEID = '"+PacID+"' ORDER BY SOL_FECHAHORA")
-	   ResultSet resultado = conexion.executeQuery(query)
-	   Object solicitudID = null
-	   Object pacienteID = null
-	   while(resultado.next()){
-		   solicitudID = resultado.getObject("SOL_ID")
-		   pacienteID = resultado.getObject("SOL_PACIENTEID")
-		   println ("El Id de la Solicitud es:" + solicitudID)
-		   println ("El Id del Paciente es:" + pacienteID)
-		   
-		   /**Obtener los IDs del Estudio para la solicitudID*/
-		   String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' ")
-		   ResultSet resultado2 = conexion.executeQuery(query2)
-		   Object Estudio = null
-		   while(resultado2.next()){
-			   Estudio = resultado2.getObject("SOL_ESTUDIOID")
-			   println ("El Id del Estudio es:" + Estudio)
+				/**Obtener el ID del Sector para el Estudio*/
+				String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
+				ResultSet resultado3 = conexion.executeQuery(query3)
+				Object Sector = null
+				while(resultado3.next()){
+					Sector = resultado3.getObject("EST_SEC_ID")
+					println ("El Id del Sector es:" + Sector)
 
-			   /**Obtener el ID del Sector para el Estudio*/
-			   String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
-			   ResultSet resultado3 = conexion.executeQuery(query3)
-			   Object Sector = null
-			   while(resultado3.next()){
-				   Sector = resultado3.getObject("EST_SEC_ID")
-				   println ("El Id del Sector es:" + Sector)
+					/**Obtener el ID de la Unidad para el SectorID*/
+					String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
+					ResultSet resultado4 = conexion.executeQuery(query4)
+					Object Unidad = null
+					while(resultado4.next()){
+						Unidad = resultado4.getObject("SEC_UNI_ID")
+						println ("El Id de la Unidad es:" + Unidad)
+						String cadena = ""
+						if(Unidad == 1){
+							cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
+							String dia = cadena.substring(8, 10)
+							String mes = cadena.substring(5, 7)
+							String año = cadena.substring(0, 4)
+							String fechadesde = dia + '/' + mes + '/' + año
+							println ("El fecha desde es:" + fechadesde)
+							Resultadofinal = Resultadofinal + " " + fechadesde
+							println ("La cadena es:" + cadena)
+							println ("El Resultado Final es:" + Resultadofinal)
+						}
+					}
+				}
+			}
+		}
+		println ("La longitud es:" + Resultadofinal.length())
+		if(Resultadofinal.length() != 0){
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
 
-				   /**Obtener el ID de la Unidad para el SectorID*/
-				   String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
-				   ResultSet resultado4 = conexion.executeQuery(query4)
-				   Object Unidad = null
-				   while(resultado4.next()){
-					   Unidad = resultado4.getObject("SEC_UNI_ID")
-					   println ("El Id de la Unidad es:" + Unidad)
-					   String cadena = ""
-					   if(Unidad == 1){
-						   cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
-						   String dia = cadena.substring(8, 10)
-						   String mes = cadena.substring(5, 7)
-						   String año = cadena.substring(0, 4)
-						   String fechadesde = dia + '/' + mes + '/' + año
-						   println ("El fecha desde es:" + fechadesde)
-						   Resultadofinal = Resultadofinal + " " + fechadesde
-						   println ("La cadena es:" + cadena)
-						   println ("El Resultado Final es:" + Resultadofinal)
-					   }
-				   }
-			   }
-		   }
-	   }
-	   println ("La longitud es:" + Resultadofinal.length())
-	   if(Resultadofinal.length() != 0){
-		   Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
-		   fd = Resultadofinal.split(" ")
-	   }
-	   
-	   return fd
-   }
+		return fd
+	}
+
+	/** Verify Filtro Paciente in Virologia funciona ok para una Fecha desde y Fecha hasta
+	 */
+	@Keyword
+	def FiltroPacienteVirologia(String fechaD, String fechaH, String paciente){
+		String Resultadofinal = ""
+		String [] fd
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+
+		/**Obtener el Paciente para un pacienteID Y NroDocumento*/
+		String query5 = String.format("SELECT PACIE_ID, PACIE_NRODOCUMENTO FROM PACIENTE WHERE PACIE_NRODOCUMENTO = '" + paciente + "' ")
+		ResultSet resultado5 = conexion.executeQuery(query5)
+		Object PacID = null
+		if(resultado5.next()){
+			PacID = resultado5.getObject("PACIE_ID")
+		}
+
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y Estado*/
+		String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA, SOL_PACIENTEID FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_PACIENTEID = '"+PacID+"' ORDER BY SOL_FECHAHORA")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		Object pacienteID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			pacienteID = resultado.getObject("SOL_PACIENTEID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+			println ("El Id del Paciente es:" + pacienteID)
+
+			/**Obtener los IDs del Estudio para la solicitudID*/
+			String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			while(resultado2.next()){
+				Estudio = resultado2.getObject("SOL_ESTUDIOID")
+				println ("El Id del Estudio es:" + Estudio)
+
+				/**Obtener el ID del Sector para el Estudio*/
+				String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
+				ResultSet resultado3 = conexion.executeQuery(query3)
+				Object Sector = null
+				while(resultado3.next()){
+					Sector = resultado3.getObject("EST_SEC_ID")
+					println ("El Id del Sector es:" + Sector)
+
+					/**Obtener el ID de la Unidad para el SectorID*/
+					String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
+					ResultSet resultado4 = conexion.executeQuery(query4)
+					Object Unidad = null
+					while(resultado4.next()){
+						Unidad = resultado4.getObject("SEC_UNI_ID")
+						println ("El Id de la Unidad es:" + Unidad)
+						String cadena = ""
+						if(Unidad == 1){
+							cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
+							String dia = cadena.substring(8, 10)
+							String mes = cadena.substring(5, 7)
+							String año = cadena.substring(0, 4)
+							String fechadesde = dia + '/' + mes + '/' + año
+							println ("El fecha desde es:" + fechadesde)
+							Resultadofinal = Resultadofinal + " " + fechadesde
+							println ("La cadena es:" + cadena)
+							println ("El Resultado Final es:" + Resultadofinal)
+						}
+					}
+				}
+			}
+		}
+		println ("La longitud es:" + Resultadofinal.length())
+		if(Resultadofinal.length() != 0){
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
+
+		return fd
+	}
+
+	/** Verify Filtro Fecha Validada in Virologia funciona ok para una Fecha desde y Fecha hasta
+	 */
+	@Keyword
+	def FiltroFechaValVirologia(String fechaD, String fechaH, String fechaV){
+		String Resultadofinal = ""
+		String [] fd
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH*/
+		String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') ORDER BY SOL_FECHAHORA")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener los IDs del Estudio para la solicitudID*/
+			String query2 = String.format("SELECT SOL_ESTUDIOID, SOL_ID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '" + solicitudID + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			while(resultado2.next()){
+				Estudio = resultado2.getObject("SOL_ESTUDIOID")
+				println ("El Id del Estudio es:" + Estudio)
+
+				/**Obtener el ID del Sector para el Estudio*/
+				String query3 = String.format("SELECT EST_ID, EST_SEC_ID FROM ESTUDIO WHERE EST_ID = '" + Estudio + "'")
+				ResultSet resultado3 = conexion.executeQuery(query3)
+				Object Sector = null
+				while(resultado3.next()){
+					Sector = resultado3.getObject("EST_SEC_ID")
+					println ("El Id del Sector es:" + Sector)
+
+					/**Obtener el ID de la Unidad para el SectorID*/
+					String query4 = String.format("SELECT SEC_ID, SEC_UNI_ID FROM SECTOR WHERE SEC_ID = '" + Sector + "'")
+					ResultSet resultado4 = conexion.executeQuery(query4)
+					Object Unidad = null
+					while(resultado4.next()){
+						Unidad = resultado4.getObject("SEC_UNI_ID")
+						println ("El Id de la Unidad es:" + Unidad)
+						String cadena = ""
+						if(Unidad == 1){
+
+							/**Obtener si existe solicitud con Fecha de Validación >= que el filtro que viene como parámetro en el método*/
+							String query5 = String.format("SELECT COUNT(*) FROM RESULTADOESTANDAREXAMENLIBVAL WHERE EXAMENLIBVALRESEST_SOL_ID = '" + solicitudID + "' AND EXAMENLIBVALRESEST_VAL_FECHA >= TO_TIMESTAMP('"+fechaV+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') ")
+							ResultSet resultado5 = conexion.executeQuery(query5)
+							Object Cantidad = null
+							while(resultado5.next()){
+								Cantidad = resultado5.getObject("COUNT(*)")
+								println ("La cantidad de fechas Validadas que existen son:" + Cantidad)
+							}
+
+							if(Cantidad > 0){
+								cadena = resultado.getObject("SOL_FECHAHORA").toString().substring(0, 10)
+								String dia = cadena.substring(8, 10)
+								String mes = cadena.substring(5, 7)
+								String año = cadena.substring(0, 4)
+								String fechadesde = dia + '/' + mes + '/' + año
+								println ("El fecha desde es:" + fechadesde)
+								Resultadofinal = Resultadofinal + " " + fechadesde
+								println ("La cadena es:" + cadena)
+								println ("El Resultado Final es:" + Resultadofinal)
+							}
+						}
+					}
+				}
+			}
+		}
+		println ("La longitud es:" + Resultadofinal.length())
+		if(Resultadofinal.length() != 0){
+			Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+			fd = Resultadofinal.split(" ")
+		}
+
+		return fd
+	}
+
+	/** Verify Liberación Parcial in Virologia funciona ok
+	 */
+	@Keyword
+	def IngresoLP1Virologia(String fechaD, String fechaH, String numeroSOL, String estudio, String muestra, int longitud){
+		String Resultadofinal = ""
+		String [] fd
+		String muestra2
+		muestra2 = "%" + muestra + "%"
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		String query
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y numeroSOL*/
+		query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+numeroSOL+"'")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener el ID del Estudio para el estudio*/
+			String query2 = String.format("SELECT EST_ID FROM ESTUDIO WHERE EST_NOMBRE = '" + estudio + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			resultado2.next()
+			Estudio = resultado2.getObject("EST_ID")
+			println ("El Id del Estudio es:" + Estudio)
+
+			/**Obtener el ID de la Muestra para la descripcion*/
+			String query3 = String.format("SELECT MUE_ID FROM MUESTRA WHERE MUE_DESCRIPCION LIKE '%s'", muestra2.trim())
+			ResultSet resultado3 = conexion.executeQuery(query3)
+			Object Muestra = null
+			resultado3.next()
+			Muestra = resultado3.getObject("MUE_ID")
+			println ("El Id de la Muestra es:" + Muestra)
+
+			/**Obtener la Descripción del Exámen para la solicitudID*/
+			String query4 = String.format("SELECT RESEST_VERSION, RESEST_EXA_ROTULO FROM RESULTADOESTANDAREXAMEN WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' ")
+			ResultSet resultado4 = conexion.executeQuery(query4)
+			Object examen = null
+			Object version = null
+			while(resultado4.next()){
+				examen = resultado4.getObject("RESEST_EXA_ROTULO")
+				version = resultado4.getObject("RESEST_VERSION")
+				println ("El Examen es:" + examen)
+				println ("La Versión es:" + version)
+
+				/**Obtener si está liberado el Examen para el examen, version, muestra y solicitudID*/
+				/**String query5 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' AND EXAMENLIBVALRESEST_VERSION = '" + version + "'")*/
+				String query5 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE EXAMENLIBVALRESEST_SOL_ID = '%s' AND EXAMENLIBVALRESEST_EST_ID = '%s' AND EXAMENLIBVALRESEST_MUE_ID = '%s' AND EXAMENLIBVALRESEST_VERSION = '%s'", solicitudID.toString().trim(), Estudio.toString().trim(), Muestra.toString().trim(), version.toString().trim())
+				ResultSet resultado5 = conexion.executeQuery(query5)
+				Object liberado = null
+
+				/**Obtener la cantidad de Elementos en la Tabla RESULTADOESTANDAREXAMENLIBVAL*/
+				/**String query6 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' AND EXAMENLIBVALRESEST_VERSION = '" + version + "'")*/
+				String query6 = String.format("SELECT COUNT(*) FROM RESULTADOESTANDAREXAMENLIBVAL WHERE EXAMENLIBVALRESEST_SOL_ID = '%s' AND EXAMENLIBVALRESEST_EST_ID = '%s' AND EXAMENLIBVALRESEST_MUE_ID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim(), Muestra.toString().trim())
+				ResultSet resultado6 = conexion.executeQuery(query6)
+				Object cantidad = null
+				int cantidadT = 0
+				resultado6.next()
+				cantidad = resultado6.getObject("COUNT(*)")
+				cantidadT = cantidad
+				String aux = (cantidadT - longitud) + 1
+				println ("El valor aux es:" + aux)
+
+				while(resultado5.next()){
+					liberado = resultado5.getObject("EXAMENLIBVALRESEST_LIBERADO")
+					println ("El examen $version se encuentra liberado o no:" + liberado)
+					if(version.toString() == aux){
+						Resultadofinal = examen.toString().trim() + ":" + liberado
+					}
+				}
+			}
+		}
+		if(Resultadofinal.length() != 0){
+			fd = Resultadofinal.split(":")
+		}
+		return fd
+	}
+
+	/** Verify Liberación Total in Virologia funciona ok
+	 */
+	@Keyword
+	def IngresoLT1Virologia(String fechaD, String fechaH, String numeroSOL, String estudio, String muestra, int longitud){
+		String Resultadofinal = ""
+		String [] fd
+		String muestra2
+		muestra2 = "%" + muestra + "%"
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		String query
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y numeroSOL*/
+		query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+numeroSOL+"'")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener el ID del Estudio para el estudio*/
+			String query2 = String.format("SELECT EST_ID FROM ESTUDIO WHERE EST_NOMBRE = '" + estudio + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			resultado2.next()
+			Estudio = resultado2.getObject("EST_ID")
+			println ("El Id del Estudio es:" + Estudio)
+
+			/**Obtener el ID de la Muestra para la descripcion*/
+			String query3 = String.format("SELECT MUE_ID FROM MUESTRA WHERE MUE_DESCRIPCION LIKE '%s'", muestra2.trim())
+			ResultSet resultado3 = conexion.executeQuery(query3)
+			Object Muestra = null
+			resultado3.next()
+			Muestra = resultado3.getObject("MUE_ID")
+			println ("El Id de la Muestra es:" + Muestra)
+
+			/**Obtener la Descripción del Exámen para la solicitudID*/
+			String query4 = String.format("SELECT RESEST_VERSION, RESEST_EXA_ROTULO FROM RESULTADOESTANDAREXAMEN WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' ")
+			ResultSet resultado4 = conexion.executeQuery(query4)
+			Object examen = null
+			Object version = null
+			while(resultado4.next()){
+				examen = resultado4.getObject("RESEST_EXA_ROTULO")
+				version = resultado4.getObject("RESEST_VERSION")
+				println ("El Examen es:" + examen)
+				println ("La Versión es:" + version)
+
+				/**Obtener si está liberado el Examen para el examen, version, muestra y solicitudID*/
+				/**String query5 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' AND EXAMENLIBVALRESEST_VERSION = '" + version + "'")*/
+				String query5 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE EXAMENLIBVALRESEST_SOL_ID = '%s' AND EXAMENLIBVALRESEST_EST_ID = '%s' AND EXAMENLIBVALRESEST_MUE_ID = '%s' AND EXAMENLIBVALRESEST_VERSION = '%s'", solicitudID.toString().trim(), Estudio.toString().trim(), Muestra.toString().trim(), version.toString().trim())
+				ResultSet resultado5 = conexion.executeQuery(query5)
+				Object liberado = null
+
+				/**Obtener la cantidad de Elementos en la Tabla RESULTADOESTANDAREXAMENLIBVAL*/
+				/**String query6 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' AND EXAMENLIBVALRESEST_VERSION = '" + version + "'")*/
+				String query6 = String.format("SELECT COUNT(*) FROM RESULTADOESTANDAREXAMENLIBVAL WHERE EXAMENLIBVALRESEST_SOL_ID = '%s' AND EXAMENLIBVALRESEST_EST_ID = '%s' AND EXAMENLIBVALRESEST_MUE_ID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim(), Muestra.toString().trim())
+				ResultSet resultado6 = conexion.executeQuery(query6)
+				Object cantidad = null
+				int cantidadT = 0
+				int versionT = 0
+				resultado6.next()
+				cantidad = resultado6.getObject("COUNT(*)")
+				cantidadT = cantidad
+				versionT = version
+				int aux = (cantidadT - longitud) + 1
+				println ("El valor aux es:" + aux)
+
+				while(resultado5.next()){
+					liberado = resultado5.getObject("EXAMENLIBVALRESEST_LIBERADO")
+					println ("El examen $version se encuentra liberado o no:" + liberado)
+					if(versionT >= aux){
+						Resultadofinal = Resultadofinal + "-" + examen.toString().trim() + ":" + liberado
+						println ("El Resultado Final es:" + Resultadofinal)
+					}
+				}
+			}
+			println ("La longitud es:" + Resultadofinal.length())
+			if(Resultadofinal.length() != 0){
+				Resultadofinal = Resultadofinal.substring(1,Resultadofinal.length())
+				fd = Resultadofinal.split("-")
+			}
+		}
+		return fd
+	}
+
+	/** Verify Comentarios in Virologia funciona ok
+	 */
+	@Keyword
+	def IngresoComentariosVirologia(String fechaD, String fechaH, String numeroSOL, String estudio, String muestra, int longitud){
+		String Resultadofinal = ""
+		String [] fd
+		String muestra2
+		muestra2 = "%" + muestra + "%"
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		String query
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y numeroSOL*/
+		query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+numeroSOL+"'")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener el ID del Estudio para el estudio*/
+			String query2 = String.format("SELECT EST_ID FROM ESTUDIO WHERE EST_NOMBRE = '" + estudio + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			resultado2.next()
+			Estudio = resultado2.getObject("EST_ID")
+			println ("El Id del Estudio es:" + Estudio)
+
+			/**Obtener el ID de la Muestra para la solicitudID + Estudio*/
+			String query3 = String.format("SELECT SOL_EST_MUESTRAID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '%s' AND SOL_ESTUDIOID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim())
+			ResultSet resultado3 = conexion.executeQuery(query3)
+			Object Muestra = null
+			resultado3.next()
+			Muestra = resultado3.getObject("SOL_EST_MUESTRAID")
+			println ("El Id de la Muestra es:" + Muestra)
+
+			/**Obtener el ID de la Muestra para la Tabla SOLICITUDCOMENTARIO*/
+			String query4 = String.format("SELECT SOL_ESTMUES_ID FROM SOLICITUDESTUDIOSMUESTRA WHERE SOL_ID = '" + solicitudID + "' AND SOL_EST_MUESTRAID ='" + Muestra + "' ")
+			ResultSet resultado4 = conexion.executeQuery(query4)
+			Object EstudioMuestraID = null
+			while(resultado4.next()){
+				EstudioMuestraID = resultado4.getObject("SOL_ESTMUES_ID")
+				println ("El EstudioMuestraID es:" + EstudioMuestraID)
+
+				/**Obtener el Comentario para la solicitudID + el EstudioMuestraID*/
+				String query5 = String.format("select DBMS_LOB.substr(SOLICITUDCOMENTARIODESCRIPCION, 3000)  AS SOLICITUDCOMENTARIODESCRIPCION  from SOLICITUDCOMENTARIO WHERE SOLICITUDCOMENTARIOID = '" + solicitudID + "' AND SOLICITUDCOMENTARIOMUESTRAID = '" + EstudioMuestraID + "' ")
+				ResultSet resultado5 = conexion.executeQuery(query5)
+				Object Comentario = null
+				while(resultado5.next()){
+					Comentario = resultado5.getObject("SOLICITUDCOMENTARIODESCRIPCION")
+					println ("El Comentario es:" + Comentario)
+					Resultadofinal = Comentario
+				}
+			}
+		}
+		return Resultadofinal
+	}
+	
+	/** Verify Pedido de Información in Virologia funciona ok
+	 */
+	@Keyword
+	def IngresoInformacionVirologia(String fechaD, String fechaH, String numeroSOL, String estudio, String muestra, int longitud){
+		String Resultadofinal = ""
+		String [] fd
+		String muestra2
+		muestra2 = "%" + muestra + "%"
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		String query
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y numeroSOL*/
+		query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+numeroSOL+"'")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener el ID del Estudio para el estudio*/
+			String query2 = String.format("SELECT EST_ID FROM ESTUDIO WHERE EST_NOMBRE = '" + estudio + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			resultado2.next()
+			Estudio = resultado2.getObject("EST_ID")
+			println ("El Id del Estudio es:" + Estudio)
+
+			/**Obtener el ID de la Muestra para la solicitudID + Estudio*/
+			String query3 = String.format("SELECT SOL_EST_MUESTRAID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '%s' AND SOL_ESTUDIOID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim())
+			ResultSet resultado3 = conexion.executeQuery(query3)
+			Object Muestra = null
+			resultado3.next()
+			Muestra = resultado3.getObject("SOL_EST_MUESTRAID")
+			println ("El Id de la Muestra es:" + Muestra)
+
+			/**Obtener el ID de la Muestra para la Tabla SOLICITUDINFORMACION*/
+			String query4 = String.format("SELECT SOL_ESTMUES_ID FROM SOLICITUDESTUDIOSMUESTRA WHERE SOL_ID = '" + solicitudID + "' AND SOL_EST_MUESTRAID ='" + Muestra + "' ")
+			ResultSet resultado4 = conexion.executeQuery(query4)
+			Object EstudioMuestraID = null
+			while(resultado4.next()){
+				EstudioMuestraID = resultado4.getObject("SOL_ESTMUES_ID")
+				println ("El EstudioMuestraID es:" + EstudioMuestraID)
+
+				/**Obtener el Pedido de Información para la solicitudID + el Estudio + el EstudioMuestraID*/
+				String query5 = String.format("select DBMS_LOB.substr(SOLICITUDINFORMACIONMENSAJE, 3000)  AS SOLICITUDINFORMACIONMENSAJE  from SOLICITUDINFORMACION WHERE SOLICITUDINFORMACIONSOL_ID = '" + solicitudID + "' AND SOLICITUDINFORMACIONESTUDIOID ='" + Estudio + "' AND SOLICITUDINFORMACIONMUESTRAID = '" + EstudioMuestraID + "' ")
+				ResultSet resultado5 = conexion.executeQuery(query5)
+				Object PInformacion = null
+				while(resultado5.next()){
+					PInformacion = resultado5.getObject("SOLICITUDINFORMACIONMENSAJE")
+					println ("El Comentario es:" + PInformacion)
+					Resultadofinal = PInformacion
+				}
+			}
+		}
+		return Resultadofinal
+	}
+
 }

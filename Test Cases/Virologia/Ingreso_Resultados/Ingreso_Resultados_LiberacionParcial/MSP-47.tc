@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MSP-47</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>5b9c688a-e897-45f1-a9b7-91613377fc18</testCaseGuid>
+   <variable>
+      <defaultValue>'09/12/2018'</defaultValue>
+      <description></description>
+      <id>f2def1ef-2f90-4bb4-a567-b0f069d321f9</id>
+      <masked>false</masked>
+      <name>fechaD</name>
+   </variable>
+   <variable>
+      <defaultValue>'09/12/2019'</defaultValue>
+      <description></description>
+      <id>77bcccc0-96e8-43f7-84bc-31398de70a78</id>
+      <masked>false</masked>
+      <name>fechaH</name>
+   </variable>
+</TestCaseEntity>

@@ -34,4 +34,9 @@
       <initValue>'gxmsp'</initValue>
       <name>passwordDB</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'http://colo1.msp.gub.uy/ELAB_Test/servlet/login'</initValue>
+      <name>url2</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
