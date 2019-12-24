@@ -91,22 +91,22 @@ WebUI.executeJavaScript(('$("#vFECHAHASTA").val("' + fechahasta) + '");', null)
 //Select Estado Todos
 WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("");', null)
 
-//Create Data Internal from EstadoEstudio
-InternalData IDEstado = findTestData('Data Files/VIROLOGIA/Internal Data Estado')
+//Create Data Internal from Estado
+InternalData IDEstadoEstudio = findTestData('Data Files/VIROLOGIA/Internal Data EstadoEstudio')
 
-//Select EstadoEstudio = EnProceso
-String Estado = IDEstado.getValue(1, 3)
+//Select EstadoEstudio = En Proceso
+String EstadoEstudio = IDEstadoEstudio.getValue(1, 3)
 
-//Select Estado Todos
-WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("' + Estado + '");', null)
-println ("El Sector seleccionado es:" + Estado)
+//Select EstadoEstudio En Proceso
+WebUI.executeJavaScript('$("#vESTUDIOESTADO").val("' + EstadoEstudio + '");', null)
+println ("El Sector seleccionado es:" + EstadoEstudio)
 
 //click buton filtro (Lupa)
 WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/img_Sector_IMAGE1'))
 
 int longitud = WebUI.executeJavaScript('return $("#SolicitudesContainerTbl tbody tr").length;', null)
 
-String ElemTable, numeroSOL, estudio, muestra, PInformacion
+String ElemTable, numeroSOL, estudio, muestra, titlePI, titlePF
 
 if(longitud > 0){
 	WebUI.delay(1)
@@ -116,34 +116,33 @@ if(longitud > 0){
 	WebUI.delay(2)
 	estudio = WebUI.executeJavaScript('return $("#span_vEST_ROTULO_0001").attr("title");', null)
 	longitud = WebUI.executeJavaScript('return $("#ResultadosContainerTbl tbody tr").length-1;', null)
+	
+	//Obtener título de la página donde estoy navegando
+	titlePI = WebUI.getWindowTitle()
+	println ("El Título de la página en donde me encuentro navegando es:" + titlePI)
 }
-
-CRUD crud = new CRUD()
-
-String resultFC = crud.IngresoInformacionVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud)
-
-println ("El resultado del Pedido de Información es:" + resultFC)
-
-//Click en Pedido de Información
-WebUI.click(findTestObject('Object Repository/Virologia/Page_Ingreso de Resultado/input_  _BTNINFO'))
-WebUI.delay(2)
-
-PInformacion = WebUI.executeJavaScript('return $("#gxp0_ifrm").contents().find("#vSOLICITUDINFORMACIONMENSAJE").val();', null)
-println ("El Pedido de Información mostrado en Pantalla es:" + PInformacion)
 
 boolean filtroF
 
-if(resultFC.equals(PInformacion)){
+if(longitud > 0){
+	//Click en BOTON CANCELAR
+	WebUI.executeJavaScript('$("#BTN_CANCEL").click();', null)
+	WebUI.delay(2)
+	
+	//Obtener título de la página donde estoy navegando
+	titlePF = WebUI.getWindowTitle()
+	println ("El Título de la página en donde me encuentro navegando es:" + titlePF)
+}
+
+if(!titlePI.equals(titlePF) && titlePF == "Bandeja de trabajo de Unidades"){
 	filtroF = true
 }
 else{
 	filtroF = false
 }
 
-WebUI.delay(1)
-
 if (filtroF) {
-    println("Para el Estudio: $estudio, Muestra: $muestra y Solicitud Número: $numeroSOL, se cargó el Pedido de Información: $resultFC, que es el almacenado en la Base de Datos, funciona correctamente, Prueba Correcta")
+    println("Se puede regresar a la Bandeja de Trabajo de Virología desde el botón: Cancelar en la pantalla de Ingreso de Resultado, funciona correctamente, Prueba Correcta")
 } else {
     throw new Exception('Prueba Incorrecta')
 }

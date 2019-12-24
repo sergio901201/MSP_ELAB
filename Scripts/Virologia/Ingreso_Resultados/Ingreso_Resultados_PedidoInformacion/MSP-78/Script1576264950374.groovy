@@ -121,6 +121,14 @@ boolean filtroF
 WebUI.click(findTestObject('Object Repository/Virologia/Page_Ingreso de Resultado/input_  _BTNINFO'))
 WebUI.delay(2)
 
+//Click en Enviar al Prestador
+WebUI.executeJavaScript('$("#gxp0_ifrm").contents().find("#BUTTON3").click();', null)
+WebUI.delay(2)
+
+//Click en Pedido de Información
+WebUI.click(findTestObject('Object Repository/Virologia/Page_Ingreso de Resultado/input_  _BTNINFO'))
+WebUI.delay(2)
+
 //Verificar que se muestra un span con el Pedido de Información en Solo Lectura
 PInformacion = WebUI.executeJavaScript('return $("#gxp0_ifrm").contents().find("#span_vSOLICITUDINFORMACIONMENSAJE").length;', null)
 

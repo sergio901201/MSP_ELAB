@@ -141,17 +141,13 @@ WebUI.delay(2)
 
 String resultFC1 = crud.IngresoInformacionVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud)
 
-println ("El resultado del Pedido de Información luego de dar click en Cancelar es:" + resultFC1)
+println ("El resultado del Pedido de Información luego de dar click en Confirmar es:" + resultFC1)
 
-if(resultFC.equals(resultFC1)){
+if(!resultFC.equals(resultFC1)){
 	filtroF = true
 }else{
 	filtroF = false
 }
-
-//Click en Pedido de Información
-WebUI.executeJavaScript('$("#gxp0_ifrm").contents().find("#vSOLICITUDINFORMACIONMENSAJE").click();', null)
-WebUI.delay(2)
 
 if (filtroF) {
     println("Para el Estudio: $estudio, Muestra: $muestra y Solicitud Número: $numeroSOL, el Pedido de Información era el siguiente: $resultFC, y ahora después de Confirmar es: $resultFC1, funciona correctamente, Prueba Correcta")

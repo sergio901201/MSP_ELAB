@@ -534,7 +534,7 @@ public class CRUD {
 		return fd
 	}
 
-	/** Verify Filtro Estudio in Virologia funciona ok para una Fecha desde y Fecha hasta
+	/** Verify Filtro Prestador in Virologia funciona ok para una Fecha desde y Fecha hasta
 	 */
 	@Keyword
 	def FiltroPrestadorVirologia(String fechaD, String fechaH, String prestador){
@@ -1034,7 +1034,7 @@ public class CRUD {
 		}
 		return Resultadofinal
 	}
-	
+
 	/** Verify Pedido de Información in Virologia funciona ok
 	 */
 	@Keyword
@@ -1084,7 +1084,7 @@ public class CRUD {
 				Object PInformacion = null
 				while(resultado5.next()){
 					PInformacion = resultado5.getObject("SOLICITUDINFORMACIONMENSAJE")
-					println ("El Comentario es:" + PInformacion)
+					println ("El Pedido de Información es:" + PInformacion)
 					Resultadofinal = PInformacion
 				}
 			}
@@ -1092,4 +1092,226 @@ public class CRUD {
 		return Resultadofinal
 	}
 
+	/** Verify Ingreso de Resultados in Virologia funciona ok
+	 */
+	@Keyword
+	def IngresoResultadosVirologia(String fechaD, String fechaH, String numeroSOL, String estudio, String muestra, int longitud, String rotuloF){
+		String Resultadofinal = ""
+		String [] fd
+		String muestra2
+		muestra2 = "%" + muestra + "%"
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y numeroSOL*/
+		String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+numeroSOL+"'")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener el ID del Estudio para el estudio*/
+			String query2 = String.format("SELECT EST_ID FROM ESTUDIO WHERE EST_NOMBRE = '" + estudio + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			resultado2.next()
+			Estudio = resultado2.getObject("EST_ID")
+			println ("El Id del Estudio es:" + Estudio)
+
+			/**Obtener el ID de la Muestra para la descripcion*/
+			String query3 = String.format("SELECT MUE_ID FROM MUESTRA WHERE MUE_DESCRIPCION LIKE '%s'", muestra2.trim())
+			ResultSet resultado3 = conexion.executeQuery(query3)
+			Object Muestra = null
+			resultado3.next()
+			Muestra = resultado3.getObject("MUE_ID")
+			println ("El Id de la Muestra es:" + Muestra)
+
+			/**Obtener la Descripción del Exámen para la solicitudID*/
+			String query4 = String.format("SELECT RESEST_EXA_ROTULO, RESEST_RESULTADO, RESEST_VERSION FROM RESULTADOESTANDAREXAMEN WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' ")
+			ResultSet resultado4 = conexion.executeQuery(query4)
+			Object result = null
+			Object rotulo = null
+			Object version = null
+			while(resultado4.next()){
+				result = resultado4.getObject("RESEST_RESULTADO")
+				rotulo = resultado4.getObject("RESEST_EXA_ROTULO")
+				version = resultado4.getObject("RESEST_VERSION")
+				println ("El Resultado es:" + result)
+				println ("El Rótulo es:" + rotulo)
+				println ("La Versión es:" + version)
+
+				/**Obtener la cantidad de Elementos en la Tabla RESULTADOESTANDAREXAMENLIBVAL*/
+				/**String query5 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' AND EXAMENLIBVALRESEST_VERSION = '" + version + "'")*/
+				String query5 = String.format("SELECT COUNT(*) FROM RESULTADOESTANDAREXAMEN WHERE RESEST_SOL_ID = '%s' AND RESEST_EST_ID = '%s' AND RESEST_MUE_ID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim(), Muestra.toString().trim())
+				ResultSet resultado5 = conexion.executeQuery(query5)
+				Object cantidad = null
+				int cantidadT = 0
+				resultado5.next()
+				cantidad = resultado5  .getObject("COUNT(*)")
+				cantidadT = cantidad
+				int versionT = version
+				int aux = (cantidadT - longitud) + 1
+				println ("El valor aux es:" + aux)
+				rotulo = rotulo.toString().trim()
+
+				if(versionT >= aux && rotuloF.equals(rotulo)){
+					Resultadofinal = rotulo.toString().trim() + ":" + result.toString().trim()
+					println ("El Resultado Final es:" + Resultadofinal)
+				}
+			}
+			println ("La longitud es:" + Resultadofinal.length())
+			if(Resultadofinal.length() != 0){
+				fd = Resultadofinal.split(":")
+			}
+		}
+		return fd
+	}
+
+	/** Verify Ingreso de Antirretrovirales in Virologia funciona ok
+	 */
+	@Keyword
+	def IngresoAntirretroviralesVirologia(String fechaD, String fechaH, String numeroSOL, String estudio, String muestra, int longitud, String antirretroviral){
+		String Resultadofinal = ""
+		String [] fd
+		String muestra2
+		muestra2 = "%" + muestra + "%"
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y numeroSOL*/
+		String query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+numeroSOL+"'")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener el ID del Estudio para el estudio*/
+			String query2 = String.format("SELECT EST_ID FROM ESTUDIO WHERE EST_NOMBRE = '" + estudio + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			resultado2.next()
+			Estudio = resultado2.getObject("EST_ID")
+			println ("El Id del Estudio es:" + Estudio)
+
+			/**Obtener el ID de la Muestra para la descripcion*/
+			String query3 = String.format("SELECT MUE_ID FROM MUESTRA WHERE MUE_DESCRIPCION LIKE '%s'", muestra2.trim())
+			ResultSet resultado3 = conexion.executeQuery(query3)
+			Object Muestra = null
+			resultado3.next()
+			Muestra = resultado3.getObject("MUE_ID")
+			println ("El Id de la Muestra es:" + Muestra)
+
+			/**Obtener la Descripción del Exámen para la solicitudID*/
+			String query4 = String.format("SELECT RESEST_ANT_NOMBRE, RESEST_ANT_INTERPRETACION, RESEST_VERSION FROM RESULTADOESTANDARANTIRRETROVIR WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' ")
+			ResultSet resultado4 = conexion.executeQuery(query4)
+			Object nombre = null
+			Object interpretacion = null
+			Object version = null
+			while(resultado4.next()){
+				nombre = resultado4.getObject("RESEST_ANT_NOMBRE")
+				interpretacion = resultado4.getObject("RESEST_ANT_INTERPRETACION")
+				version = resultado4.getObject("RESEST_VERSION")
+				println ("El Nombre del Antirretroviral es:" + nombre)
+				println ("La Interpretación es:" + interpretacion)
+				println ("La Versión es:" + version)
+
+				/**Obtener la cantidad de Elementos en la Tabla RESULTADOESTANDAREXAMENLIBVAL*/
+				/**String query5 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' AND EXAMENLIBVALRESEST_VERSION = '" + version + "'")*/
+				String query5 = String.format("SELECT COUNT(*) FROM RESULTADOESTANDARANTIRRETROVIR WHERE RESEST_SOL_ID = '%s' AND RESEST_EST_ID = '%s' AND RESEST_MUE_ID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim(), Muestra.toString().trim())
+				ResultSet resultado5 = conexion.executeQuery(query5)
+				Object cantidad = null
+				int cantidadT = 0
+				resultado5.next()
+				cantidad = resultado5  .getObject("COUNT(*)")
+				cantidadT = cantidad
+				int versionT = version
+				int aux = (cantidadT - longitud) + 1
+				println ("El valor aux es:" + aux)
+				antirretroviral = antirretroviral.toString().trim()
+				nombre = nombre.toString().trim()
+
+				if(versionT >= aux && antirretroviral.equals(nombre)){
+					Resultadofinal = nombre + ":" + interpretacion.toString().trim()
+					println ("El Resultado Final es:" + Resultadofinal)
+				}
+			}
+			println ("La longitud es:" + Resultadofinal.length())
+			if(Resultadofinal.length() != 0){
+				fd = Resultadofinal.split(":")
+			}
+		}
+		return fd
+	}
+
+	/** Ingreso de Informe in Virologia funciona ok
+	 */
+	@Keyword
+	def IngresoInformeVirologia(String fechaD, String fechaH, String numeroSOL, String estudio, String muestra, int longitud, String rotuloF){
+		String Resultadofinal = ""
+		String [] fd
+		String muestra2
+		muestra2 = "%" + muestra + "%"
+		SQLConnect conexion = new SQLConnect();
+		conexion.connectDB(GlobalVariable.urlDB, GlobalVariable.portDB, GlobalVariable.nameDB, GlobalVariable.userDB, GlobalVariable.passwordDB);
+		String query
+		/**Obtener ID de la Solicitud para una Fecha Desde Y fechaH y numeroSOL*/
+		query = String.format("SELECT SOL_ID, SOL_FECHA, SOL_FECHAHORA FROM SOLICITUD WHERE SOL_SOLICITUDESTADO NOT LIKE 'I' AND SOL_HABILITADA = '0' AND SOL_FECHAHORA >= TO_TIMESTAMP('"+fechaD+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_FECHAHORA <= TO_TIMESTAMP('"+fechaH+" 00:00:00.000','YYYY-MM-DD HH24:MI:SS.FF') AND SOL_NUMERO = '"+numeroSOL+"'")
+		ResultSet resultado = conexion.executeQuery(query)
+		Object solicitudID = null
+		while(resultado.next()){
+			solicitudID = resultado.getObject("SOL_ID")
+			println ("El Id de la Solicitud es:" + solicitudID)
+
+			/**Obtener el ID del Estudio para el estudio*/
+			String query2 = String.format("SELECT EST_ID FROM ESTUDIO WHERE EST_NOMBRE = '" + estudio + "' ")
+			ResultSet resultado2 = conexion.executeQuery(query2)
+			Object Estudio = null
+			resultado2.next()
+			Estudio = resultado2.getObject("EST_ID")
+			println ("El Id del Estudio es:" + Estudio)
+
+			/**Obtener el ID de la Muestra para la solicitudID + Estudio*/
+			String query3 = String.format("SELECT SOL_EST_MUESTRAID FROM SOLICITUDESTUDIOS WHERE SOL_ID = '%s' AND SOL_ESTUDIOID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim())
+			ResultSet resultado3 = conexion.executeQuery(query3)
+			Object Muestra = null
+			resultado3.next()
+			Muestra = resultado3.getObject("SOL_EST_MUESTRAID")
+			println ("El Id de la Muestra es:" + Muestra)
+
+			/**Obtener el valor del Rótulo para la Tabla RESULTADOESTANDAREXAMEN*/
+			String query4 = String.format("SELECT RESEST_EXA_ROTULO, RESEST_VERSION, DBMS_LOB.substr(RESEST_INFORME, 3000)  AS INFORME FROM RESULTADOESTANDAREXAMEN WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID = '" + Estudio + "' AND RESEST_MUE_ID ='" + Muestra + "' ")
+			ResultSet resultado4 = conexion.executeQuery(query4)
+			Object rotulo = null
+			Object version = null
+			Object informe = null
+			while(resultado4.next()){
+				rotulo = resultado4.getObject("RESEST_EXA_ROTULO")
+				version = resultado4.getObject("RESEST_VERSION")
+				informe = resultado4.getObject("INFORME")
+				println ("El Rótulo es:" + rotulo)
+				println ("La Versión es:" + version)
+				println ("El Informe es:" + informe)
+
+				/**Obtener la cantidad de Elementos en la Tabla RESULTADOESTANDAREXAMENLIBVAL*/
+				/**String query5 = String.format("SELECT EXAMENLIBVALRESEST_LIBERADO FROM RESULTADOESTANDAREXAMENLIBVAL WHERE WHERE RESEST_SOL_ID = '" + solicitudID + "' AND RESEST_EST_ID ='" + Estudio + "' AND RESEST_MUE_ID = '" + Muestra + "' AND EXAMENLIBVALRESEST_VERSION = '" + version + "'")*/
+				String query5 = String.format("SELECT COUNT(*) FROM RESULTADOESTANDAREXAMEN WHERE RESEST_SOL_ID = '%s' AND RESEST_EST_ID = '%s' AND RESEST_MUE_ID = '%s'", solicitudID.toString().trim(), Estudio.toString().trim(), Muestra.toString().trim())
+				ResultSet resultado5 = conexion.executeQuery(query5)
+				Object cantidad = null
+				int cantidadT = 0
+				resultado5.next()
+				cantidad = resultado5  .getObject("COUNT(*)")
+				cantidadT = cantidad
+				int versionT = version
+				int aux = (cantidadT - longitud) + 1
+				println ("El valor aux es:" + aux)
+				rotulo = rotulo.toString().trim()
+
+				if(versionT >= aux && rotuloF.equals(rotulo)){
+					Resultadofinal = informe.toString().trim()
+					println ("El Resultado Final es:" + Resultadofinal)
+				}
+			}
+		}
+		return Resultadofinal
+	}
 }

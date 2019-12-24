@@ -91,22 +91,22 @@ WebUI.executeJavaScript(('$("#vFECHAHASTA").val("' + fechahasta) + '");', null)
 //Select Estado Todos
 WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("");', null)
 
-//Create Data Internal from EstadoEstudio
-InternalData IDEstado = findTestData('Data Files/VIROLOGIA/Internal Data Estado')
+//Create Data Internal from Estado
+InternalData IDEstadoEstudio = findTestData('Data Files/VIROLOGIA/Internal Data EstadoEstudio')
 
-//Select EstadoEstudio = EnProceso
-String Estado = IDEstado.getValue(1, 3)
+//Select EstadoEstudio = En Proceso
+String EstadoEstudio = IDEstadoEstudio.getValue(1, 3)
 
-//Select Estado Todos
-WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("' + Estado + '");', null)
-println ("El Sector seleccionado es:" + Estado)
+//Select EstadoEstudio En Proceso
+WebUI.executeJavaScript('$("#vESTUDIOESTADO").val("' + EstadoEstudio + '");', null)
+println ("El Sector seleccionado es:" + EstadoEstudio)
 
 //click buton filtro (Lupa)
 WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/img_Sector_IMAGE1'))
 
 int longitud = WebUI.executeJavaScript('return $("#SolicitudesContainerTbl tbody tr").length;', null)
 
-String ElemTable, numeroSOL, estudio, muestra, PInformacion
+String ElemTable, numeroSOL, estudio, muestra
 
 if(longitud > 0){
 	WebUI.delay(1)
@@ -118,32 +118,81 @@ if(longitud > 0){
 	longitud = WebUI.executeJavaScript('return $("#ResultadosContainerTbl tbody tr").length-1;', null)
 }
 
+boolean filtroF
+String  rotulo, antirretroviral, imagenANT
+String[] resultFC, resultFC1
 CRUD crud = new CRUD()
 
-String resultFC = crud.IngresoInformacionVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud)
-
-println ("El resultado del Pedido de Información es:" + resultFC)
-
-//Click en Pedido de Información
-WebUI.click(findTestObject('Object Repository/Virologia/Page_Ingreso de Resultado/input_  _BTNINFO'))
-WebUI.delay(2)
-
-PInformacion = WebUI.executeJavaScript('return $("#gxp0_ifrm").contents().find("#vSOLICITUDINFORMACIONMENSAJE").val();', null)
-println ("El Pedido de Información mostrado en Pantalla es:" + PInformacion)
-
-boolean filtroF
-
-if(resultFC.equals(PInformacion)){
-	filtroF = true
+if(longitud > 0){
+	//Obtener el valor del Rótulo para el 1er Resultado
+	rotulo = WebUI.executeJavaScript('return $("#span_vEST_EXA_ROTULO_0002").text();', null)
+	rotulo = rotulo.toString().trim()
+	println ("El Rótulo modificado para el 1er Resultado es:" + rotulo)
+	WebUI.delay(1)
+	
+	//Click en 1er Antirretroviral
+	WebUI.executeJavaScript('$("#vACC_ANT_0002").click();', null)
+	WebUI.delay(2)
+	
+	//Obtener el Antirretroviral
+	antirretroviral = WebUI.executeJavaScript('return $("#gxp0_ifrm").contents().find("#span_vRESEST_ANT_NOMBRE_0001").text();', null)
+	antirretroviral = antirretroviral.toString().trim()
+	println ("El Antirretroviral para el 1er Resultado es:" + antirretroviral)
+	WebUI.delay(2)
+	
+	//Seleccionar un valor ANTIRRETROVITALES para el 1er Resultado
+	WebUI.executeJavaScript('$("#gxp0_ifrm").contents().find("#vRESEST_ANT_INTERPRETACION_0001").val("R");', null)
+	println ("El Informe escrito en el 1er Resultado es: Resistencia (R)" )
+	WebUI.delay(2)
+	
+	resultFC = crud.IngresoAntirretroviralesVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud, antirretroviral)
+	
+	//Click en Confirmar
+	WebUI.executeJavaScript('$("#gxp0_ifrm").contents().find("#BTN_ENTER").click();', null)
+	WebUI.delay(1)
+	
+	//Ver si la IMG del 1er Antirretroviral está cargado en verde o no
+	imagenANT = WebUI.executeJavaScript('return $("#vACC_ANT_0002").attr("title");', null)
+	println ("El Antirretroviral para el 1er Resultado fue cargado o no:" + imagenANT )
+	WebUI.delay(2)
+	
+	resultFC1 = crud.IngresoAntirretroviralesVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud, antirretroviral)
 }
-else{
-	filtroF = false
-}
 
-WebUI.delay(1)
+if(resultFC != null){
+	if(resultFC.length == 2){
+		println ("!!!El Antirretroviral para el arreglo resultFC es:" + resultFC[0] + " y La interpretación es:" + resultFC[1])
+		println ("!!!El Antirretroviral para el arreglo resultFC1 es:" + resultFC1[0] + " y La interpretación es:" + resultFC1[1])
+		
+		if(resultFC[0].equals(resultFC1[0]) && antirretroviral.equals(resultFC1[0]) && !resultFC[1].equals(resultFC1[1]) && imagenANT.equals("Antirretrovirales cargados...")){
+			filtroF = true
+		}
+		else{
+			filtroF = false
+		}
+		println ("El valor de la booleana es:" + filtroF)
+	}else{
+		println ("!!!El Antirretroviral para el arreglo resultFC es:" + resultFC[0] + " y La interpretación es:" + " ")
+		println ("!!!El Antirretroviral para el arreglo resultFC1 es:" + resultFC1[0] + " y La interpretación es:" + resultFC1[1])
+		if(resultFC[0].equals(resultFC1[0]) && antirretroviral.equals(resultFC1[0]) && resultFC1[1].equals("R") && imagenANT.equals("Antirretrovirales cargados...")){
+			filtroF = true
+			}
+		else{
+			filtroF = false
+			}
+		}	
+}else{
+	if(antirretroviral.equals(resultFC1[0]) && resultFC1[1].equals("R") && imagenANT.equals("Antirretrovirales cargados...")){
+		filtroF = true
+		}
+	else{
+		filtroF = false
+		}
+	}
+
 
 if (filtroF) {
-    println("Para el Estudio: $estudio, Muestra: $muestra y Solicitud Número: $numeroSOL, se cargó el Pedido de Información: $resultFC, que es el almacenado en la Base de Datos, funciona correctamente, Prueba Correcta")
+    println("Para el Estudio: $estudio, Muestra: $muestra y Solicitud Número: $numeroSOL, el Antirretroviral: $antirretroviral tiene la siguiente interpretación: R, fue adicionado, funciona correctamente, Prueba Correcta")
 } else {
     throw new Exception('Prueba Incorrecta')
 }

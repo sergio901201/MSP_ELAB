@@ -141,7 +141,7 @@ WebUI.delay(2)
 
 String resultFC1 = crud.IngresoComentariosVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud)
 
-println ("El resultado del Comentario luego de dar click en Cancelar es:" + resultFC1)
+println ("El resultado del Comentario luego de dar click en Confirmar es:" + resultFC1)
 
 if(!resultFC.equals(resultFC1)){
 	filtroF = true

@@ -136,6 +136,7 @@ if(longitud > 0){
 
 int longitudF = WebUI.executeJavaScript('return $("#gxp0_ifrm").contents().find("#W0008Grid1ContainerTbl tbody tr").length;', null)
 boolean filtroF
+println ("La longitud luego de aplicar filtro es de:" + longitudF)
 
 if(longitudF > 0){
 	rotuloF = WebUI.executeJavaScript('return $("#gxp0_ifrm").contents().find("#span_W0008INF_ROTULO_0001").text();', null)

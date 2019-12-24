@@ -91,22 +91,22 @@ WebUI.executeJavaScript(('$("#vFECHAHASTA").val("' + fechahasta) + '");', null)
 //Select Estado Todos
 WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("");', null)
 
-//Create Data Internal from EstadoEstudio
-InternalData IDEstado = findTestData('Data Files/VIROLOGIA/Internal Data Estado')
+//Create Data Internal from Estado
+InternalData IDEstadoEstudio = findTestData('Data Files/VIROLOGIA/Internal Data EstadoEstudio')
 
-//Select EstadoEstudio = EnProceso
-String Estado = IDEstado.getValue(1, 3)
+//Select EstadoEstudio = En Proceso
+String EstadoEstudio = IDEstadoEstudio.getValue(1, 3)
 
-//Select Estado Todos
-WebUI.executeJavaScript('$("#vSOLICITUDESTADO").val("' + Estado + '");', null)
-println ("El Sector seleccionado es:" + Estado)
+//Select EstadoEstudio En Proceso
+WebUI.executeJavaScript('$("#vESTUDIOESTADO").val("' + EstadoEstudio + '");', null)
+println ("El Sector seleccionado es:" + EstadoEstudio)
 
 //click buton filtro (Lupa)
 WebUI.click(findTestObject('Object Repository/Virologia/Page_Bienvenida/Page_Bandeja de trabajo de Unidades (1)/img_Sector_IMAGE1'))
 
 int longitud = WebUI.executeJavaScript('return $("#SolicitudesContainerTbl tbody tr").length;', null)
 
-String ElemTable, numeroSOL, estudio, muestra, PInformacion
+String ElemTable, numeroSOL, estudio, muestra
 
 if(longitud > 0){
 	WebUI.delay(1)
@@ -118,32 +118,63 @@ if(longitud > 0){
 	longitud = WebUI.executeJavaScript('return $("#ResultadosContainerTbl tbody tr").length-1;', null)
 }
 
+boolean filtroF
+String  rotulo, imagenI
+String resultFC, resultFC1, informe = "Informe de Prueba"
 CRUD crud = new CRUD()
 
-String resultFC = crud.IngresoInformacionVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud)
-
-println ("El resultado del Pedido de Información es:" + resultFC)
-
-//Click en Pedido de Información
-WebUI.click(findTestObject('Object Repository/Virologia/Page_Ingreso de Resultado/input_  _BTNINFO'))
-WebUI.delay(2)
-
-PInformacion = WebUI.executeJavaScript('return $("#gxp0_ifrm").contents().find("#vSOLICITUDINFORMACIONMENSAJE").val();', null)
-println ("El Pedido de Información mostrado en Pantalla es:" + PInformacion)
-
-boolean filtroF
-
-if(resultFC.equals(PInformacion)){
-	filtroF = true
+if(longitud > 0){
+	//Obtener el valor del Rótulo para el 1er Resultado
+	rotulo = WebUI.executeJavaScript('return $("#span_vEST_EXA_ROTULO_0002").text();', null)
+	rotulo = rotulo.toString().trim()
+	println ("El Rótulo modificado para el 1er Resultado es:" + rotulo)
+	WebUI.delay(1)
+	
+	//Click en 1er Informe
+	WebUI.executeJavaScript('$("#vACC_INF_0002").click();', null)
+	WebUI.delay(2)
+	
+	//Escribir un Informe de Prueba
+	WebUI.executeJavaScript('$("#gxp0_ifrm").contents().find("#vRESEST_INFORME").val("'+informe+'");', null)
+	println ("El Informe escrito en el 1er Resultado es: Resistencia (R)" )
+	WebUI.delay(2)
+	
+	resultFC = crud.IngresoInformeVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud, rotulo)
+	
+	//Click en Confirmar
+	WebUI.executeJavaScript('$("#gxp0_ifrm").contents().find("#BTN_ENTER").click();', null)
+	WebUI.delay(2)
+	
+	//Ver si la IMG del 1er Informe está cargado en verde o no
+	imagenI = WebUI.executeJavaScript('return $("#vACC_INF_0002").attr("alt");', null)
+	println ("El Informe para el 1er Resultado fue cargado o no:" + imagenI )
+	WebUI.delay(2)
+	
+	resultFC1 = crud.IngresoInformeVirologia(fechaBDD, fechaBDH, numeroSOL, estudio, muestra, longitud, rotulo)
 }
-else{
-	filtroF = false
-}
 
-WebUI.delay(1)
+if(resultFC != null){
+	println ("!!!El Informe para el arreglo resultFC es:" + resultFC)
+	println ("!!!El Informe para el arreglo resultFC1 es:" + resultFC1)
+	
+	if(!resultFC.equals(resultFC1) && !imagenI.equals("")){
+		filtroF = true
+	}
+	else{
+		filtroF = false
+	}
+	println ("El valor de la booleana es:" + filtroF)
+}else{
+	if(informe.equals(resultFC1) && !imagenI.equals("")){
+		filtroF = true
+		}
+	else{
+		filtroF = false
+		}
+	}
 
 if (filtroF) {
-    println("Para el Estudio: $estudio, Muestra: $muestra y Solicitud Número: $numeroSOL, se cargó el Pedido de Información: $resultFC, que es el almacenado en la Base de Datos, funciona correctamente, Prueba Correcta")
+    println("Para el Estudio: $estudio, Muestra: $muestra y Solicitud Número: $numeroSOL, el Informe es: $informe, fue adicionado, funciona correctamente, Prueba Correcta")
 } else {
     throw new Exception('Prueba Incorrecta')
 }
